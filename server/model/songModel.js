@@ -10,6 +10,10 @@ const SongSchema = new mongoose.Schema(
       type: String,
       set: capitalizeFirstLetter,
     },
+    artist: {
+      type: String,
+      set: capitalizeFirstLetter,
+    },
     album: {
       type: String,
       set: capitalizeFirstLetter,
@@ -18,6 +22,15 @@ const SongSchema = new mongoose.Schema(
       type: String,
       set: capitalizeFirstLetter,
     },
+    musicDuration: {
+      type: String,
+    },
+
+    musicFile: {
+      type: String,
+      default: "0:00",
+    },
+
     artistPic: {
       type: String,
     },
