@@ -1,23 +1,27 @@
 const mongoose = require("mongoose");
 
+function capitalizeFirstLetter(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 const SongSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      uppercase: true,
+      set: capitalizeFirstLetter,
     },
-    Album: {
+    album: {
       type: String,
-      uppercase: true,
+      set: capitalizeFirstLetter,
     },
-    Genre: {
+    genre: {
       type: String,
-      uppercase: true,
+      set: capitalizeFirstLetter,
     },
-    ArtistPic: {
+    artistPic: {
       type: String,
     },
-    AlbumPic: {
+    albumPic: {
       type: String,
     },
   },
