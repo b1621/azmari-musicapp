@@ -165,3 +165,18 @@ exports.listAlbums = asyncHandler(async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error });
   }
 });
+
+exports.getAlbumSongs = asyncHandler(async (req, res) => {
+  try {
+    const album = req.params.albumName;
+
+    const songs = await Song.find({
+      album: { $regex: new RegExp(album, "i") },
+    });
+
+    res.status(200).json({ total: songs.length, songs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
+});

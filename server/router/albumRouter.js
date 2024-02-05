@@ -1,11 +1,11 @@
 const express = require("express");
 
-const { listAlbums } = require("../controller/songController");
+const { listAlbums, getAlbumSongs } = require("../controller/songController");
 
 const router = express.Router();
 
 router.route("/").get(listAlbums);
-// router.route("/:artistName").get(getArtistSongs);
+router.route("/:albumName").get(getAlbumSongs);
 
 // router.route("/:songId").delete(deleteSong);
 module.exports = router;
