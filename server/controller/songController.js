@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 
 const Song = require("../model/songModel");
 
@@ -50,10 +51,15 @@ exports.deleteSong = asyncHandler(async (req, res) => {
   try {
     const songId = req.params.songId;
 
-    const songs = await Song.find({});
-    res.status(200).json({
-      total: songs.length,
-      songs,
+    if (!mongoose.Types.ObjectId.isValid(songId)) {
+      res.status(400);
+      throw new Error("Invalid song ID");
+    }
+
+    await Song.deleteOne({ _id: songId });
+
+    res.status(201).json({
+      message: "song deleted !!",
     });
   } catch (error) {
     res.status(500);
