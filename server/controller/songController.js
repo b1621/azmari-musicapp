@@ -95,9 +95,8 @@ exports.deleteSong = asyncHandler(async (req, res) => {
   }
 });
 
-exports.getAllArtists = async (req, res) => {
+exports.getAllArtists = asyncHandler(async (req, res) => {
   try {
-    // const artists = await Song.distinct("artist");
     const artistsWithSongCount = await Song.aggregate([
       {
         $group: {
@@ -115,10 +114,54 @@ exports.getAllArtists = async (req, res) => {
         },
       },
     ]);
-    // console.log("artistsWithSongCount  = ", artistsWithSongCount);
+
     res.status(200).json({ artists: artistsWithSongCount });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-};
+});
+
+exports.getArtistSongs = asyncHandler(async (req, res) => {
+  try {
+    const artist = req.params.artistName;
+
+    const songs = await Song.find({
+      artist: { $regex: new RegExp(artist, "i") },
+    });
+
+    res.status(200).json({ total: songs.length, songs });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
+});
+
+exports.listAlbums = asyncHandler(async (req, res) => {
+  try {
+    const albums = await Song.aggregate([
+      {
+        $group: {
+          _id: "$album",
+          artist: { $first: "$artist" }, // Get the first artist (assuming it's the same for all songs in the album)
+          songCount: { $sum: 1 },
+          createdAt: { $first: "$createdAt" }, // Get the creation time of the first song in the album
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          album: "$_id",
+          artist: 1,
+          songCount: 1,
+          createdAt: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({ total: albums.length, albums });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
+});
