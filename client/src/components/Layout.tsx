@@ -3,7 +3,12 @@ import styled from "@emotion/styled";
 
 const Layout = () => {
   const Box = styled.div`
-    border: 1px solid black;
+    display: flex;
+  `;
+  const SidebarBox = styled.div`
+    width: 20%;
+    height: 100vh;
+    background-color: #272d46;
   `;
   const Button = styled.button`
     padding: 32px;
@@ -16,15 +21,24 @@ const Layout = () => {
       color: white;
     }
   `;
+  const Logo = styled.h3`
+    border: 1px solid breen;
+  `;
+  const Div1 = styled.div`
+    border: 1px solid black;
+  `;
   return (
-    <div>
-      <Box>
-        <Button>Hello world</Button>
-      </Box>
+    <Box>
+      <SidebarBox>
+        <Div1>
+          <Logo>Azmari</Logo>
+        </Div1>
+        {/* <Button>Hello world</Button> */}
+      </SidebarBox>
       <div>
         <Outlet />
       </div>
-    </div>
+    </Box>
   );
 };
 
