@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import styled from "@emotion/styled";
+import Songs from "./pages/Songs";
 
 function App() {
   const Box = styled.div`
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout isOpen={true} />}>
               <Route path="" element={"home"} />
+              <Route path="song" element={<Songs />} />
             </Route>
             <Route path="*" element={"404 page not found"} />
           </Routes>
