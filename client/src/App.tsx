@@ -17,6 +17,7 @@ function App() {
             <Route path="/" element={<Layout isOpen={true} />}>
               <Route path="" element={"home"} />
             </Route>
+            <Route path="*" element={"404 page not found"} />
           </Routes>
         </BrowserRouter>
       </Box>
