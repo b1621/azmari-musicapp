@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { RxDashboard } from "react-icons/rx";
 import { BiAlbum } from "react-icons/bi";
@@ -7,6 +7,10 @@ import { BsFileMusic } from "react-icons/bs";
 
 interface SidebarProps {
   isOpen: boolean;
+}
+interface SidebarLinkProps {
+  currentPath: string;
+  linkPath: string;
 }
 
 const Box = styled.div`
@@ -29,7 +33,7 @@ const Div2 = styled.div`
   padding: 10px 0;
 `;
 
-const SidebarLink = styled(Link)`
+const SidebarLink = styled(Link)<SidebarLinkProps>`
   display: flex;
   align-items: center;
   color: white;
@@ -37,18 +41,28 @@ const SidebarLink = styled(Link)`
   margin: 0 auto;
   text-decoration: none;
   padding: 10px 20px;
+  background-color: ${({ currentPath, linkPath }) =>
+    currentPath == linkPath ? "#394262" : ""};
+  color: ${({ currentPath, linkPath }) =>
+    currentPath == linkPath ? "#fb8b24" : ""};
   margin-bottom: 15px;
   & > *:first-child {
     margin-right: 0.5rem; /* Adjust space between icon and text */
   }
   &:hover {
     background-color: #394262;
+    border-radius: 5px;
     color: #fb8b24;
     // border-left: 3px solid hotpink;
   }
 `;
 
 const Layout = ({ isOpen }: SidebarProps) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  console.log("path = ", currentPath);
+
   return (
     <Box>
       <SidebarBox isOpen={isOpen}>
@@ -56,16 +70,24 @@ const Layout = ({ isOpen }: SidebarProps) => {
           <Logo>Azmari</Logo>
         </Div1>
         <Div2>
-          <SidebarLink to="/">
+          <SidebarLink currentPath={currentPath} linkPath={"/"} to="/">
             <RxDashboard /> Dashboard
           </SidebarLink>
-          <SidebarLink to="/album">
+          <SidebarLink
+            currentPath={currentPath}
+            linkPath={"/album"}
+            to="/album"
+          >
             <BiAlbum /> Album
           </SidebarLink>
-          <SidebarLink to="/artist">
+          <SidebarLink
+            currentPath={currentPath}
+            linkPath={"/artist"}
+            to="/artist"
+          >
             <BsMusicNoteList /> Artist
           </SidebarLink>
-          <SidebarLink to="/song">
+          <SidebarLink currentPath={currentPath} linkPath={"/song"} to="/song">
             <BsFileMusic /> Song
           </SidebarLink>
         </Div2>
