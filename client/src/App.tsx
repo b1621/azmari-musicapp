@@ -14,7 +14,7 @@ function App() {
       <Box>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout isOpen={true} />}>
               <Route path="" element={"home"} />
             </Route>
           </Routes>
