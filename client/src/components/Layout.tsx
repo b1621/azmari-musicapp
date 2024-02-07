@@ -17,7 +17,7 @@ const Box = styled.div`
   display: flex;
 `;
 const SidebarBox = styled.div<SidebarProps>`
-  width: ${({ isOpen }) => (isOpen ? "16%" : "0px")};
+  width: ${({ isOpen }) => (isOpen ? "18vw" : "0px")};
   height: 100vh;
   background-color: #272d46;
 `;
@@ -26,11 +26,18 @@ const Logo = styled.h2`
   color: white;
   margin: 20px 0;
 `;
+const LogoImage = styled.img`
+  width: 25px;
+  margin-right: 2px;
+`;
 const Div1 = styled.div`
   margin: 30px 0;
 `;
 const Div2 = styled.div`
   padding: 10px 0;
+`;
+const Content = styled.div`
+  width: 80vw;
 `;
 
 const SidebarLink = styled(Link)<SidebarLinkProps>`
@@ -67,7 +74,10 @@ const Layout = ({ isOpen }: SidebarProps) => {
     <Box>
       <SidebarBox isOpen={isOpen}>
         <Div1>
-          <Logo>Azmari</Logo>
+          <Logo>
+            {" "}
+            <LogoImage src="/headphones.png" alt="" /> Azmari
+          </Logo>
         </Div1>
         <Div2>
           <SidebarLink currentPath={currentPath} linkPath={"/"} to="/">
@@ -93,9 +103,9 @@ const Layout = ({ isOpen }: SidebarProps) => {
         </Div2>
         {/* Other sidebar links can be added here */}
       </SidebarBox>
-      <div>
+      <Content>
         <Outlet />
-      </div>
+      </Content>
     </Box>
   );
 };
