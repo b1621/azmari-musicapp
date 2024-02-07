@@ -38,7 +38,7 @@ const Songs = () => {
           Songs
         </Header>
       </HeaderBox>
-      <TableLayout headerList={["#", "song"]}>
+      <TableLayout headerList={["#", "title", "album", "released date"]}>
         <div></div>
       </TableLayout>
     </Box>

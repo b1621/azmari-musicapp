@@ -14,6 +14,7 @@ const OverflowHiddenDiv = styled.div`
 // background-color: white;
 const Table = styled.table`
   width: 100%;
+  border: 1px solid green;
   text-align: left;
   font-size: 0.875rem; /* equivalent to text-sm */
   font-weight: 300; /* equivalent to font-light */
