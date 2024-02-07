@@ -17,7 +17,7 @@ const Box = styled.div`
   display: flex;
 `;
 const SidebarBox = styled.div<SidebarProps>`
-  width: ${({ isOpen }) => (isOpen ? "18vw" : "0px")};
+  width: ${({ isOpen }) => (isOpen ? "16vw" : "0px")};
   height: 100vh;
   background-color: #272d46;
 `;
@@ -37,7 +37,7 @@ const Div2 = styled.div`
   padding: 10px 0;
 `;
 const Content = styled.div`
-  width: 80vw;
+  width: 82vw;
 `;
 
 const SidebarLink = styled(Link)<SidebarLinkProps>`
