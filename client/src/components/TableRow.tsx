@@ -7,7 +7,7 @@ interface TableRowProps {
 
 const StyledTr = styled.tr`
   padding: 5px 0;
-
+  border-bottom: 1px solid #272d46;
   &:hover {
     background-color: #272d46; /* equivalent to hover:bg-slate-100 */
   }

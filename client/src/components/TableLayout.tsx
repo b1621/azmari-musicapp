@@ -31,7 +31,7 @@ const TableHead = styled.thead`
 // `;
 
 const TableHeader = styled.th`
-  padding: 1.5rem 1rem; /* equivalent to px-6 py-4 */
+  padding: 15px 10px; /* equivalent to px-6 py-4 */
   color: white;
 `;
 
