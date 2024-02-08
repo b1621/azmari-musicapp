@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import styled from "@emotion/styled";
 import Songs from "./pages/Songs";
 import Artists from "./pages/Artists";
+import Album from "./pages/Album";
 
 function App() {
   const Box = styled.div`
@@ -20,6 +21,7 @@ function App() {
               <Route path="" element={"home"} />
               <Route path="song" element={<Songs />} />
               <Route path="artist" element={<Artists />} />
+              <Route path="album" element={<Album />} />
             </Route>
             <Route path="*" element={"404 page not found"} />
           </Routes>

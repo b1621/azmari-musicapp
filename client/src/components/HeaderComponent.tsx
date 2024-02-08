@@ -50,7 +50,7 @@ const BackgroundImage = styled.div<{ backgroundImage: string }>`
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5); /* Adjust the brightness value as needed */
+  filter: brightness(0.4); /* Adjust the brightness value as needed */
 `;
 
 const Content = styled.div`
