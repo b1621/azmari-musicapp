@@ -13,12 +13,14 @@ const AlbumBox = styled.div`
   padding: 10px;
   cursor: pointer;
   background-color: #272d46;
+  transition: all 0.4s ease-in-out;
 
   @media (max-width: 1400px) {
     width: 250px;
   }
   &:hover {
-    background-color: red;
+    background-color: #3c4258;
+    transform: scale(1.1);
   }
 `;
 const AlbumImage = styled.img`
