@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import TableLayout from "../components/TableLayout";
 import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
+import Button from "../components/Button";
 
 const ImageElement = styled.img`
   width: 85vw;
@@ -63,6 +64,16 @@ const AritstImage = styled.img`
   margin-right: 15px;
   border-radius: 50%;
 `;
+// const SongTitle = styled.p`
+//   display: flex;
+//   width: 70px;
+//   margin-right: 15px;
+//   border-radius: 50%;
+// `;
+
+const HeaderStyled = styled.div`
+  padding: 20px 0;
+`;
 const Songs = () => {
   return (
     <Box>
@@ -72,6 +83,9 @@ const Songs = () => {
           Songs
         </Header>
       </HeaderBox>
+      <HeaderStyled>
+        <Button>+ Add Task</Button>
+      </HeaderStyled>
       <TableLayout headerList={["#", "title", "album", "released date"]}>
         {songslist.map((song, index) => (
           <TableRow key={index}>

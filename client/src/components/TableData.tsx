@@ -5,7 +5,7 @@ interface TableDataProps {
 }
 
 const Td = styled.td`
-  padding: 16px 10px;
+  padding: 10px 10px;
 `;
 const TableData = ({ children }: TableDataProps) => {
   return <Td>{children}</Td>;
