@@ -10,10 +10,11 @@ interface AlbumCoverProps {
 
 const AlbumBox = styled.div`
   width: 300px;
+  border: 1px solid #272d46;
+  background-color: rgba(39, 45, 70, 0.6);
   padding: 10px;
   cursor: pointer;
   border-radius: 10px;
-  background-color: #272d46;
   transition: all 0.4s ease-in-out;
 
   @media (max-width: 1400px) {
@@ -28,7 +29,7 @@ const AlbumImage = styled.img`
   width: 100%;
   height: 180px;
   background-color: #1d2339;
-  filter: brightness(0.8);
+  filter: brightness(0.7);
 
   @media (max-width: 1400px) {
     height: 120px;
