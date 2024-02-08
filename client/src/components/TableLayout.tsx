@@ -24,27 +24,18 @@ const TableHead = styled.thead`
   border-bottom: 1px solid slategray; /* equivalent to border-b border-slate-300 */
 `;
 
-// const TableRow = styled.tr`
-//  &:hover {
-//     background-color: #f7fafc; /* equivalent to hover:bg-slate-100 */
-//   }
-// `;
-
 const TableHeader = styled.th`
   padding: 15px 10px; /* equivalent to px-6 py-4 */
   color: white;
 `;
 
-// const TableData = styled.td`
-//   padding: 1.5rem 1rem; /* equivalent to px-6 py-4 */
-// `;
-
 const TableSpan = styled.span`
-display: "flex",
 alignItems: "center",
+display: "flex",
+justify-content:space-between;
 gap: "0.25rem",
-fontWeight: "600", // equivalent to font-semibold
-color: "slategray", // equivalent to text-slate-700
+fontWeight: "600", 
+color: "slategray",
 `;
 
 const TableBody = styled.tbody`
