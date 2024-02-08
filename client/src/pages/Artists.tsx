@@ -70,7 +70,8 @@ const H2 = styled.div`
 const Artists = () => {
   return (
     <Box>
-      <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
+      {/* <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg"> */}
+      <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg">
         <Header>
           <H1>Artists</H1>
           <H2>Total of {artistsList.length} Artists</H2>

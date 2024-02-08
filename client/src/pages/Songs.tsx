@@ -3,30 +3,28 @@ import TableLayout from "../components/TableLayout";
 import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
 import Button from "../components/Button";
+import HeaderComponent from "../components/HeaderComponent";
 
-const ImageElement = styled.img`
-  width: 85vw;
-  height: 40vh;
-`;
-// width: 85vw;
-// opacity: 0.6;
-const HeaderBox = styled.div`
-  height: 36vh;
-  border: 1px solid #1d2339;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  background-image: url(${"austin-neill-hgO1wFPXl3I-unsplash.jpg"});
-  background-size: cover; /* Adjusts the size of the background image to cover the entire div */
-  background-position: center; /* Centers the background image within the div */
-`;
+// const ImageElement = styled.img`
+//   width: 85vw;
+//   height: 40vh;
+// `;
+// // width: 85vw;
+// // opacity: 0.6;
+// const HeaderBox = styled.div`
+//   height: 36vh;
+//   border: 1px solid #1d2339;
+//   width: 100%;
+//   background-color: rgba(0, 0, 0, 0.3);
+//   background-image: url(${"austin-neill-hgO1wFPXl3I-unsplash.jpg"});
+//   background-size: cover; /* Adjusts the size of the background image to cover the entire div */
+//   background-position: center; /* Centers the background image within the div */
+// `;
 const Box = styled.div`
   margin: 10px;
   width: 100%;
 `;
-const Header = styled.h2`
-  text-align: center;
-  display: relative;
-`;
+
 // const BackOpacity = styled.div`
 //   display: absolute;
 //   border: 1px solid green;
@@ -74,15 +72,30 @@ const AritstImage = styled.img`
 const HeaderStyled = styled.div`
   padding: 20px 0;
 `;
+
+const Header = styled.div`
+  text-align: center;
+  padding-top: 8%;
+`;
+const H1 = styled.div`
+  font-size: 4.6rem;
+  color: #d27e4e;
+`;
+const H2 = styled.div`
+  font-size: 1.6rem;
+  color: #fff;
+`;
+
 const Songs = () => {
   return (
     <Box>
-      <HeaderBox>
+      <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
+        {/* <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg"> */}
         <Header>
-          {/* <BackOpacity>0</BackOpacity> */}
-          Songs
+          <H1>Songs</H1>
+          <H2>Total of x Songs</H2>
         </Header>
-      </HeaderBox>
+      </HeaderComponent>
       <HeaderStyled>
         <Button>+ Add Task</Button>
       </HeaderStyled>
