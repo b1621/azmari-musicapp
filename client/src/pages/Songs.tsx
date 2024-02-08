@@ -53,13 +53,14 @@ const songslist = [
 ];
 
 const TitleStyled = styled.div`
-  dispay: flex;
+  display: flex;
+  align-items: center;
   flex-direction: row;
-  border-1px solid blue;
 `;
 const AritstImage = styled.img`
-  dispay: flex;
+  display: flex;
   width: 70px;
+  margin-right: 15px;
   border-radius: 50%;
 `;
 const Songs = () => {

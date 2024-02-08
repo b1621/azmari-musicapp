@@ -14,7 +14,7 @@ const OverflowHiddenDiv = styled.div`
 // background-color: white;
 const Table = styled.table`
   width: 100%;
-  border: 1px solid green;
+  border-collapse: collapse;
   text-align: left;
   font-size: 0.875rem; /* equivalent to text-sm */
   font-weight: 300; /* equivalent to font-light */
@@ -32,6 +32,7 @@ const TableHead = styled.thead`
 
 const TableHeader = styled.th`
   padding: 1.5rem 1rem; /* equivalent to px-6 py-4 */
+  color: white;
 `;
 
 // const TableData = styled.td`
@@ -47,7 +48,7 @@ color: "slategray", // equivalent to text-slate-700
 `;
 
 const TableBody = styled.tbody`
-  border: 1px solid yellow;
+  color: #f2f2f2;
 `;
 
 const TableLayout: React.FC<TableLayoutProps> = ({ children, headerList }) => {
