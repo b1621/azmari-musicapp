@@ -51,7 +51,7 @@ const Box = styled.div`
 `;
 const Header = styled.div`
   text-align: center;
-  padding-top: 8%;
+  padding-top: 6%;
 `;
 const H1 = styled.div`
   font-size: 4.6rem;
@@ -63,8 +63,9 @@ const H2 = styled.div`
 `;
 const ContentBox = styled.div`
   display: flex;
+  justify-content: center;
   margin: 30px 20px;
-  gap: 40px;
+  gap: 50px;
   flex-wrap: wrap;
 `;
 

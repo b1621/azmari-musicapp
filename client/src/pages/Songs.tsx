@@ -75,7 +75,7 @@ const HeaderStyled = styled.div`
 
 const Header = styled.div`
   text-align: center;
-  padding-top: 8%;
+  padding-top: 6%;
 `;
 const H1 = styled.div`
   font-size: 4.6rem;

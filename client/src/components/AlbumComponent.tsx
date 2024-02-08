@@ -37,7 +37,7 @@ const AlbumImage = styled.img`
 const Content = styled.div``;
 const AlbumName = styled.p`
   font-size: 1.3rem;
-  padding: 10px 0;
+  padding: 7px 0;
   margin: 0px;
 `;
 const ArtistName = styled.p`
@@ -48,10 +48,14 @@ const ArtistName = styled.p`
 const Div1 = styled.div`
   display: flex;
   padding: 0px;
-  margin: 10px 0;
+  margin: 7px 0;
   justify-content: space-between;
   color: #bcbcbc;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+
+  @media (min-width: 1440px) {
+    font-size: 0.9rem;
+  }
 `;
 const ReleasedDate = styled.p`
   padding: 0px;

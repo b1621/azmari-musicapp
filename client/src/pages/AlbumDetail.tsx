@@ -13,12 +13,12 @@ const AlbumImage = styled.img`
   margin-right: 20px;
 
   @media (max-width: 1400px) {
-    height: 120px;
+    height: 190px;
   }
 `;
 const Header = styled.div`
   display: flex;
-  padding: 30px 40px;
+  padding: 20px 40px;
   align-items: center;
 
   align-content: center;

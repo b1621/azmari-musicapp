@@ -35,9 +35,10 @@ const HeaderBox = styled.div`
   height: 36vh;
   border: 1px solid #1d2339;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #272d46;
   overflow: hidden; /* Ensure the pseudo-element stays within the parent */
 `;
+// background-color: rgba(0, 0, 0, 0.3);
 
 // background-image: url(${"austin-neill-hgO1wFPXl3I-unsplash.jpg"});
 // background-image: url(${({ backgroundImage }) => backgroundImage});

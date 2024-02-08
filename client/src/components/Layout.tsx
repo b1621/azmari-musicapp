@@ -17,7 +17,7 @@ const Box = styled.div`
   display: flex;
 `;
 const SidebarBox = styled.div<SidebarProps>`
-  width: ${({ isOpen }) => (isOpen ? "16vw" : "0px")};
+  width: ${({ isOpen }) => (isOpen ? "15vw" : "0px")};
   min-height: 100vh;
   background-color: #272d46;
 `;

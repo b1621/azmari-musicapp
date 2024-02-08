@@ -52,12 +52,12 @@ const ArtistsBox = styled.div`
   justify-content: center;
   align-content: center;
   gap: 40px;
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
 `;
 const Header = styled.div`
   text-align: center;
-  padding-top: 8%;
+  padding-top: 6%;
 `;
 const H1 = styled.div`
   font-size: 4.6rem;
