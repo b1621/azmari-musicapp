@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { IoIosArrowRoundDown } from "react-icons/io";
+
 import styled from "@emotion/styled";
 
 interface TableLayoutProps {
@@ -46,6 +46,10 @@ fontWeight: "600", // equivalent to font-semibold
 color: "slategray", // equivalent to text-slate-700
 `;
 
+const TableBody = styled.tbody`
+  border: 1px solid yellow;
+`;
+
 const TableLayout: React.FC<TableLayoutProps> = ({ children, headerList }) => {
   return (
     <OverflowHiddenDiv>
@@ -62,7 +66,8 @@ const TableLayout: React.FC<TableLayoutProps> = ({ children, headerList }) => {
           ))}
           {/* </TableRow> */}
         </TableHead>
-        <tbody>{children}</tbody>
+
+        <TableBody>{children}</TableBody>
       </Table>
     </OverflowHiddenDiv>
   );
