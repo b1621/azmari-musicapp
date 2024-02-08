@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import { useNavigate } from "react-router-dom";
 interface AlbumCoverProps {
   albumImage: string;
   artist: string;
@@ -11,10 +11,14 @@ interface AlbumCoverProps {
 const AlbumBox = styled.div`
   width: 300px;
   padding: 10px;
-
+  cursor: pointer;
   background-color: #272d46;
+
   @media (max-width: 1400px) {
     width: 250px;
+  }
+  &:hover {
+    background-color: red;
   }
 `;
 const AlbumImage = styled.img`
@@ -62,8 +66,15 @@ const AlbumComponent = ({
   releasedDate,
   totalTrack,
 }: AlbumCoverProps) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const path = `/album/${album}`;
+    navigate(path);
+    // history.push(path);
+  };
+
   return (
-    <AlbumBox>
+    <AlbumBox onClick={handleClick}>
       <AlbumImage loading="lazy" src={albumImage} />
       <Content>
         <AlbumName>{album}</AlbumName>
