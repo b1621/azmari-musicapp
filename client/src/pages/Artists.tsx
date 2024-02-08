@@ -42,28 +42,38 @@ const artistsList = [
 ];
 
 const Box = styled.div`
-  border: 1px solid red;
   padding: 10px;
   width: 100%;
 `;
 const ArtistsBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid blue;
+
   justify-content: center;
   align-content: center;
   gap: 40px;
   width: 80%;
   margin: 20px auto;
 `;
-const Header = styled.div``;
+const Header = styled.div`
+  text-align: center;
+  padding-top: 8%;
+`;
+const H1 = styled.div`
+  font-size: 4.6rem;
+  color: #d27e4e;
+`;
+const H2 = styled.div`
+  font-size: 1.6rem;
+  color: #fff;
+`;
 const Artists = () => {
   return (
     <Box>
-      <HeaderComponent>
+      <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
         <Header>
-          <h2>Artists</h2>
-          <p>Total of {artistsList.length} Artists</p>
+          <H1>Artists</H1>
+          <H2>Total of {artistsList.length} Artists</H2>
         </Header>
       </HeaderComponent>
       <ArtistsBox>
