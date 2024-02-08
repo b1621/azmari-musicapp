@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 interface ArtistCoverProps {
   artistImage: string;
-  artistName: string;
+  artist: string;
   totalSongs: number;
 }
 
@@ -14,8 +15,15 @@ const Box = styled.div`
   font-weight: 400;
   text-align: center;
   padding: 5px 20px;
-  background-color: #272d46;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
+// background-color: #3c4258;
+// background-color: #272d46;
 const ArtistImage = styled.img`
   aspect-ratio: 1;
   object-fit: auto;
@@ -39,15 +47,17 @@ const Div3 = styled.div`
   white-space: nowrap;
   font: 18px Inter, sans-serif;
 `;
-const ArtistCover = ({
-  artistImage,
-  artistName,
-  totalSongs,
-}: ArtistCoverProps) => {
+const ArtistCover = ({ artistImage, artist, totalSongs }: ArtistCoverProps) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const path = `/artist/${artist}`;
+    navigate(path);
+    // history.push(path);
+  };
   return (
-    <Box>
+    <Box onClick={handleClick}>
       <ArtistImage loading="lazy" src={artistImage} />
-      <Div2>{artistName}</Div2>
+      <Div2>{artist}</Div2>
       <Div3>{totalSongs}</Div3>
     </Box>
   );

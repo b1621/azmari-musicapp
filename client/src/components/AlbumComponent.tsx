@@ -12,6 +12,7 @@ const AlbumBox = styled.div`
   width: 300px;
   padding: 10px;
   cursor: pointer;
+  border-radius: 10px;
   background-color: #272d46;
   transition: all 0.4s ease-in-out;
 
@@ -20,7 +21,7 @@ const AlbumBox = styled.div`
   }
   &:hover {
     background-color: #3c4258;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 `;
 const AlbumImage = styled.img`

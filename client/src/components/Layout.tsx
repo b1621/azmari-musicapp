@@ -83,12 +83,8 @@ const Layout = ({ isOpen }: SidebarProps) => {
           <SidebarLink currentPath={currentPath} linkPath={"/"} to="/">
             <RxDashboard /> Dashboard
           </SidebarLink>
-          <SidebarLink
-            currentPath={currentPath}
-            linkPath={"/album"}
-            to="/album"
-          >
-            <BiAlbum /> Album
+          <SidebarLink currentPath={currentPath} linkPath={"/song"} to="/song">
+            <BsFileMusic /> Song
           </SidebarLink>
           <SidebarLink
             currentPath={currentPath}
@@ -97,8 +93,12 @@ const Layout = ({ isOpen }: SidebarProps) => {
           >
             <BsMusicNoteList /> Artist
           </SidebarLink>
-          <SidebarLink currentPath={currentPath} linkPath={"/song"} to="/song">
-            <BsFileMusic /> Song
+          <SidebarLink
+            currentPath={currentPath}
+            linkPath={"/album"}
+            to="/album"
+          >
+            <BiAlbum /> Album
           </SidebarLink>
         </Div2>
         {/* Other sidebar links can be added here */}

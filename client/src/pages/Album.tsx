@@ -35,6 +35,14 @@ const albumsList = [
     albumImage:
       "https://www.okayafrica.com/media-library/rophnan-sidist.jpg?id=30180718&width=1245&height=700&quality=85&coordinates=0%2C437%2C0%2C437",
   },
+  {
+    album: "asalafi",
+    artist: "Wegdayt",
+    releasedDate: "Aug 03, 2023",
+    totalTrack: 13,
+    albumImage:
+      "https://i0.wp.com/www.capitalethiopia.com/wp-content/uploads/2023/05/Art-B.jpg?fit=899%2C599&ssl=1",
+  },
 ];
 
 const Box = styled.div`

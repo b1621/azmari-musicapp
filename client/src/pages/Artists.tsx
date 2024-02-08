@@ -81,7 +81,7 @@ const Artists = () => {
         {artistsList.map((artist, index) => (
           <ArtistCover
             key={index}
-            artistName={artist.artistName}
+            artist={artist.artistName}
             artistImage={artist.artistImage}
             totalSongs={artist.totalSongs}
           />
