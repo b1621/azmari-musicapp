@@ -13,12 +13,19 @@ const AlbumBox = styled.div`
   padding: 10px;
 
   background-color: #272d46;
+  @media (max-width: 1400px) {
+    width: 250px;
+  }
 `;
 const AlbumImage = styled.img`
   width: 100%;
   height: 180px;
   background-color: #1d2339;
   filter: brightness(0.8);
+
+  @media (max-width: 1400px) {
+    height: 120px;
+  }
 `;
 const Content = styled.div``;
 const AlbumName = styled.p`
