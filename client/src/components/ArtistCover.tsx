@@ -14,6 +14,7 @@ const Box = styled.div`
   font-weight: 400;
   text-align: center;
   padding: 0 20px;
+  background-color: #272d46;
 `;
 const ArtistImage = styled.img`
   aspect-ratio: 1;

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import ArtistCover from "../components/ArtistCover";
+import HeaderComponent from "../components/HeaderComponent";
 
 const artistsList = [
   {
@@ -40,6 +41,11 @@ const artistsList = [
   },
 ];
 
+const Box = styled.div`
+  border: 1px solid red;
+  padding: 10px;
+  width: 100%;
+`;
 const ArtistsBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -50,9 +56,16 @@ const ArtistsBox = styled.div`
   width: 80%;
   margin: 0px auto;
 `;
+const Header = styled.div``;
 const Artists = () => {
   return (
-    <div>
+    <Box>
+      <HeaderComponent>
+        <Header>
+          <h2>Artists</h2>
+          <p>Total of {artistsList.length} Artists</p>
+        </Header>
+      </HeaderComponent>
       <ArtistsBox>
         {artistsList.map((artist, index) => (
           <ArtistCover
@@ -63,7 +76,7 @@ const Artists = () => {
           />
         ))}
       </ArtistsBox>
-    </div>
+    </Box>
   );
 };
 
