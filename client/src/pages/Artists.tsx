@@ -52,9 +52,9 @@ const ArtistsBox = styled.div`
   border: 1px solid blue;
   justify-content: center;
   align-content: center;
-  gap: 20px;
+  gap: 40px;
   width: 80%;
-  margin: 0px auto;
+  margin: 20px auto;
 `;
 const Header = styled.div``;
 const Artists = () => {
