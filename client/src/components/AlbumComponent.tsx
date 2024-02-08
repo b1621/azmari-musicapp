@@ -18,6 +18,7 @@ const AlbumImage = styled.img`
   width: 100%;
   height: 180px;
   background-color: #1d2339;
+  filter: brightness(0.8);
 `;
 const Content = styled.div``;
 const AlbumName = styled.p`

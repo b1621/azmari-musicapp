@@ -18,7 +18,7 @@ const Box = styled.div`
 `;
 const SidebarBox = styled.div<SidebarProps>`
   width: ${({ isOpen }) => (isOpen ? "16vw" : "0px")};
-  height: 100vh;
+  min-height: 100vh;
   background-color: #272d46;
 `;
 const Logo = styled.h2`

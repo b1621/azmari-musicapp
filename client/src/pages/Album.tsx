@@ -27,6 +27,14 @@ const albumsList = [
     albumImage:
       "https://lastfm.freetls.fastly.net/i/u/500x500/60a3baaccec80abae773804bdc20bb5d.jpg",
   },
+  {
+    album: "six 6",
+    artist: "Rophnan",
+    releasedDate: "jan 03, 2023",
+    totalTrack: 13,
+    albumImage:
+      "https://www.okayafrica.com/media-library/rophnan-sidist.jpg?id=30180718&width=1245&height=700&quality=85&coordinates=0%2C437%2C0%2C437",
+  },
 ];
 
 const Box = styled.div`
