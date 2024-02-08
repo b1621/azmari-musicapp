@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import styled from "@emotion/styled";
 import Songs from "./pages/Songs";
+import Artists from "./pages/Artists";
 
 function App() {
   const Box = styled.div`
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Layout isOpen={true} />}>
               <Route path="" element={"home"} />
               <Route path="song" element={<Songs />} />
+              <Route path="artist" element={<Artists />} />
             </Route>
             <Route path="*" element={"404 page not found"} />
           </Routes>
