@@ -4,6 +4,8 @@ import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
 import Button from "../components/Button";
 import HeaderComponent from "../components/HeaderComponent";
+import { useState } from "react";
+import AddMusic from "./AddMusic";
 
 // const ImageElement = styled.img`
 //   width: 85vw;
@@ -87,8 +89,13 @@ const H2 = styled.div`
 `;
 
 const Songs = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const handleClick = () => {
+    setIsOpen(true);
+  };
   return (
     <Box>
+      {isOpen && <AddMusic />}
       <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
         {/* <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg"> */}
         <Header>
@@ -97,7 +104,7 @@ const Songs = () => {
         </Header>
       </HeaderComponent>
       <HeaderStyled>
-        <Button>+ Add Task</Button>
+        <Button handleClick={handleClick}>+ Add Task</Button>
       </HeaderStyled>
       <TableLayout headerList={["#", "title", "album", "released date"]}>
         {songslist.map((song, index) => (
