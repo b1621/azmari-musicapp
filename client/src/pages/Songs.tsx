@@ -6,6 +6,8 @@ import Button from "../components/Button";
 import HeaderComponent from "../components/HeaderComponent";
 import { useState } from "react";
 import AddMusic from "./AddMusic";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@reduxjs/toolkit/query";
 
 // const ImageElement = styled.img`
 //   width: 85vw;
@@ -22,6 +24,19 @@ import AddMusic from "./AddMusic";
 //   background-size: cover; /* Adjusts the size of the background image to cover the entire div */
 //   background-position: center; /* Centers the background image within the div */
 // `;
+
+// interface Song {
+//   title: string;
+//   artist: string;
+//   artistPhoto: string;
+//   album: string;
+//   dateAdded: string;
+//   musicDuration: string;
+// }
+
+// interface SongsState {
+//   songslist: Song[];
+// }
 const Box = styled.div`
   margin: 10px;
   width: 100%;
@@ -32,26 +47,26 @@ const Box = styled.div`
 //   border: 1px solid green;
 //   height: 100%;
 // `;
-const songslist = [
-  {
-    title: "perfect",
-    artist: "ed sheeran",
-    artistPhoto:
-      "https://imgs.search.brave.com/V4n370-nzAIon9wSaDLZqhgBKk1V0H5DCSTftYRC5Ks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzAxL2Ew/Lzk1LzAxYTA5NTIy/ZjIzNGE3NmIzMTE5/MDc2NTMyZjc2YjQw/LmpwZw",
-    album: "shape of you",
-    dateAdded: "sep 21, 2022",
-    musicDuration: "2:22",
-  },
-  {
-    title: "photograph",
-    artist: "ed sheeran",
-    artistPhoto:
-      "https://imgs.search.brave.com/V4n370-nzAIon9wSaDLZqhgBKk1V0H5DCSTftYRC5Ks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzAxL2Ew/Lzk1LzAxYTA5NTIy/ZjIzNGE3NmIzMTE5/MDc2NTMyZjc2YjQw/LmpwZw",
-    album: "shape of you",
-    dateAdded: "sep 21, 2022",
-    musicDuration: "3:20",
-  },
-];
+// const songslist = [
+//   {
+//     title: "perfect",
+//     artist: "ed sheeran",
+//     artistPhoto:
+//       "https://imgs.search.brave.com/V4n370-nzAIon9wSaDLZqhgBKk1V0H5DCSTftYRC5Ks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzAxL2Ew/Lzk1LzAxYTA5NTIy/ZjIzNGE3NmIzMTE5/MDc2NTMyZjc2YjQw/LmpwZw",
+//     album: "shape of you",
+//     dateAdded: "sep 21, 2022",
+//     musicDuration: "2:22",
+//   },
+//   {
+//     title: "photograph",
+//     artist: "ed sheeran",
+//     artistPhoto:
+//       "https://imgs.search.brave.com/V4n370-nzAIon9wSaDLZqhgBKk1V0H5DCSTftYRC5Ks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzAxL2Ew/Lzk1LzAxYTA5NTIy/ZjIzNGE3NmIzMTE5/MDc2NTMyZjc2YjQw/LmpwZw",
+//     album: "shape of you",
+//     dateAdded: "sep 21, 2022",
+//     musicDuration: "3:20",
+//   },
+// ];
 
 const TitleStyled = styled.div`
   display: flex;
@@ -89,10 +104,16 @@ const H2 = styled.div`
 `;
 
 const Songs = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
     setIsOpen(true);
   };
+
+  // const dispatch = useDispatch()
+  // const { songslist } = useSelector((state: RootState) => state.song);
+  const { songslist } = useSelector((state) => state.song);
+  console.log("state == ", songslist);
+
   return (
     <Box>
       {isOpen && <AddMusic />}
