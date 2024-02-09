@@ -7,8 +7,21 @@ import HeaderComponent from "../components/HeaderComponent";
 import { useState } from "react";
 import AddMusic from "./AddMusic";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "../features/songSlice";
+// Define type for a song item
+interface Song {
+  title: string;
+  artist: string;
+  artistPhoto: string;
+  album: string;
+  dateAdded: string;
+  musicDuration: string;
+}
 
+// Define type for your Redux state
+interface SongsState {
+  songslist: Song[];
+}
 // const ImageElement = styled.img`
 //   width: 85vw;
 //   height: 40vh;
@@ -25,18 +38,6 @@ import { RootState } from "@reduxjs/toolkit/query";
 //   background-position: center; /* Centers the background image within the div */
 // `;
 
-// interface Song {
-//   title: string;
-//   artist: string;
-//   artistPhoto: string;
-//   album: string;
-//   dateAdded: string;
-//   musicDuration: string;
-// }
-
-// interface SongsState {
-//   songslist: Song[];
-// }
 const Box = styled.div`
   margin: 10px;
   width: 100%;
@@ -111,7 +112,9 @@ const Songs = () => {
 
   // const dispatch = useDispatch()
   // const { songslist } = useSelector((state: RootState) => state.song);
-  const { songslist } = useSelector((state) => state.song);
+  const { songslist } = useSelector(
+    (state: RootState) => state.song
+  ) as SongsState;
   console.log("state == ", songslist);
 
   return (
@@ -128,7 +131,7 @@ const Songs = () => {
         <Button handleClick={handleClick}>+ Add Task</Button>
       </HeaderStyled>
       <TableLayout headerList={["#", "title", "album", "released date"]}>
-        {songslist.map((song, index) => (
+        {songslist.map((song: Song, index: number) => (
           <TableRow key={index}>
             <TableData>{index + 1}</TableData>
             <TableData>
