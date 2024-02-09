@@ -104,5 +104,3 @@ const songSlice = createSlice({
 
 export const { addSong } = songSlice.actions;
 export default songSlice.reducer;
-// Export RootState type
-export type RootState = ReturnType<typeof songSlice.reducer>;
