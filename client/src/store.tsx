@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import songSlice from "./features/songSlice";
+import createSagaMiddleware from "redux-saga";
 
+const saga = createSagaMiddleware();
 export const store = configureStore({
   reducer: { song: songSlice },
+  middleware: [saga],
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
