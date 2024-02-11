@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Song {
   title: string;
@@ -17,6 +17,7 @@ interface Artist {
 }
 
 interface InitialState {
+  loading: boolean;
   songslist: Song[];
   artistsList: Artist[];
 }
@@ -90,6 +91,7 @@ const initialState: InitialState = {
       totalSongs: 55,
     },
   ],
+  loading: false,
 };
 
 const songSlice = createSlice({
@@ -99,8 +101,15 @@ const songSlice = createSlice({
     addSong(state, action) {
       state.songslist.push(action.payload);
     },
+    getSongs: (state) => {
+      state.loading = true;
+    },
+    getSongsSuccess: (state, action: PayloadAction<Song[]>) => {
+      state.loading = false;
+      state.songslist = action.payload;
+    },
   },
 });
 
-export const { addSong } = songSlice.actions;
+export const { addSong, getSongs, getSongsSuccess } = songSlice.actions;
 export default songSlice.reducer;
