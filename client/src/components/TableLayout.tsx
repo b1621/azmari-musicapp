@@ -47,16 +47,18 @@ const TableLayout: React.FC<TableLayoutProps> = ({ children, headerList }) => {
     <OverflowHiddenDiv>
       <Table>
         <TableHead>
-          {/* <TableRow> */}
-          {headerList.map((element, index) => (
-            <TableHeader key={index}>
-              <TableSpan>
-                {element}
-                {/* <IoIosArrowRoundDown size={20} /> */}
-              </TableSpan>
-            </TableHeader>
-          ))}
-          {/* </TableRow> */}
+          <tr>
+            {/* <TableRow> */}
+            {headerList.map((element, index) => (
+              <TableHeader key={index}>
+                <TableSpan>
+                  {element}
+                  {/* <IoIosArrowRoundDown size={20} /> */}
+                </TableSpan>
+              </TableHeader>
+            ))}
+            {/* </TableRow> */}
+          </tr>
         </TableHead>
 
         <TableBody>{children}</TableBody>
