@@ -93,7 +93,9 @@ const songSlice = createSlice({
     },
     getSongsSuccess: (state, action: PayloadAction<Song[]>) => {
       state.loading = false;
-      state.songslist = action.payload;
+      console.log("get songs action ", action);
+
+      // state.songslist = action.payload;
     },
   },
 });

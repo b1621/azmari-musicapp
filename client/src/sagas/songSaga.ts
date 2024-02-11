@@ -1,8 +1,8 @@
 import { takeLatest, put, call, fork } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Song } from "../utils/types";
-import { fetchAllSongs } from "../httpService/songServices";
-import { getSongs, getSongsSuccess } from "../features/songSlice";
+import { Song } from "../utils/types.ts";
+import { fetchAllSongs } from "../httpService/songServices.ts";
+import { getSongs, getSongsSuccess } from "../features/songSlice.ts";
 
 function* getSongsAsync() {
   try {
