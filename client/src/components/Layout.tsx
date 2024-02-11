@@ -53,7 +53,7 @@ const SidebarLink = styled(Link)<SidebarLinkProps>`
   color: ${({ currentpath, linkpath }) =>
     currentpath == linkpath ? "#fb8b24" : ""};
   margin-bottom: 15px;
-  & > *:first-child {
+  & > *:first-of-type {
     margin-right: 0.5rem; /* Adjust space between icon and text */
   }
   &:hover {
