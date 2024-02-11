@@ -9,8 +9,8 @@ interface SidebarProps {
   isOpen: boolean;
 }
 interface SidebarLinkProps {
-  currentPath: string;
-  linkPath: string;
+  currentpath: string;
+  linkpath: string;
 }
 
 const Box = styled.div`
@@ -48,10 +48,10 @@ const SidebarLink = styled(Link)<SidebarLinkProps>`
   margin: 0 auto;
   text-decoration: none;
   padding: 10px 20px;
-  background-color: ${({ currentPath, linkPath }) =>
-    currentPath == linkPath ? "#394262" : ""};
-  color: ${({ currentPath, linkPath }) =>
-    currentPath == linkPath ? "#fb8b24" : ""};
+  background-color: ${({ currentpath, linkpath }) =>
+    currentpath == linkpath ? "#394262" : ""};
+  color: ${({ currentpath, linkpath }) =>
+    currentpath == linkpath ? "#fb8b24" : ""};
   margin-bottom: 15px;
   & > *:first-child {
     margin-right: 0.5rem; /* Adjust space between icon and text */
@@ -66,9 +66,9 @@ const SidebarLink = styled(Link)<SidebarLinkProps>`
 
 const Layout = ({ isOpen }: SidebarProps) => {
   const location = useLocation();
-  const currentPath = location.pathname;
+  const currentpath = location?.pathname || "/";
 
-  console.log("path = ", currentPath);
+  console.log("path = ", currentpath);
 
   return (
     <Box>
@@ -80,22 +80,22 @@ const Layout = ({ isOpen }: SidebarProps) => {
           </Logo>
         </Div1>
         <Div2>
-          <SidebarLink currentPath={currentPath} linkPath={"/"} to="/">
+          <SidebarLink currentpath={currentpath} linkpath={"/"} to="/">
             <RxDashboard /> Dashboard
           </SidebarLink>
-          <SidebarLink currentPath={currentPath} linkPath={"/song"} to="/song">
+          <SidebarLink currentpath={currentpath} linkpath={"/song"} to="/song">
             <BsFileMusic /> Song
           </SidebarLink>
           <SidebarLink
-            currentPath={currentPath}
-            linkPath={"/artist"}
+            currentpath={currentpath}
+            linkpath={"/artist"}
             to="/artist"
           >
             <BsMusicNoteList /> Artist
           </SidebarLink>
           <SidebarLink
-            currentPath={currentPath}
-            linkPath={"/album"}
+            currentpath={currentpath}
+            linkpath={"/album"}
             to="/album"
           >
             <BiAlbum /> Album

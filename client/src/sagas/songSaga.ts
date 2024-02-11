@@ -7,6 +7,8 @@ import { getSongs, getSongsSuccess } from "../features/songSlice";
 function* getSongsAsync() {
   try {
     const songs: Song[] = yield call(fetchAllSongs);
+    console.log("songs === ", songs);
+
     yield put(getSongsSuccess(songs));
   } catch (error) {
     console.log("error ", error);

@@ -68,7 +68,7 @@ const Songs = () => {
   const { songslist } = useSelector(
     (state: RootState) => state.song
   ) as SongsState;
-  console.log("state == ", songslist);
+  // console.log("state == ", songslist);
 
   return (
     <Box>

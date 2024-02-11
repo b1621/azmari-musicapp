@@ -10,7 +10,11 @@ export type Song = {
   musicDuration: string;
   totalTrack?: number;
 };
-
+export type Artist = {
+  artist: string;
+  artistPhoto: string;
+  totalSongs: number;
+};
 export type OverallStatDto = {
   totalSongs: number;
   totalArtists: number;

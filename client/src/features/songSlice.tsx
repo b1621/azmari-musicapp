@@ -1,25 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-interface Song {
-  title: string;
-  artist: string;
-  artistPhoto: string;
-  album: string;
-  dateAdded: string;
-  musicDuration: string;
-  totalTrack?: number;
-}
-
-interface Artist {
-  artist: string;
-  artistPhoto: string;
-  totalSongs: number;
-}
+import { Song, Artist } from "../utils/types";
 
 interface InitialState {
   loading: boolean;
   songslist: Song[];
   artistsList: Artist[];
+  openAddSongModal: boolean;
 }
 
 const initialState: InitialState = {
@@ -91,6 +77,7 @@ const initialState: InitialState = {
       totalSongs: 55,
     },
   ],
+  openAddSongModal: false,
   loading: false,
 };
 
