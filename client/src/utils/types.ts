@@ -46,3 +46,21 @@ export type AlbumInfo = {
   total: number;
   albums: AlbumData[];
 };
+
+export type AlbumSong = {
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+  createdAt: string;
+  updatedAt: string;
+  artistPic: string;
+  albumPic: string;
+};
+export type AlbumDetail = {
+  albumName: string;
+  artist: string;
+  albumPic: string;
+  total: number;
+  songs: AlbumSong[];
+};
