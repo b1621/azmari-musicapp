@@ -31,7 +31,9 @@ const ContentBox = styled.div`
 `;
 
 const Album = () => {
-  const { albumsList } = useSelector((state: RootState) => state.album);
+  const { albumsList, totalAlbums, isLoading, error } = useSelector(
+    (state: RootState) => state.album
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAlbumsList());
@@ -42,7 +44,7 @@ const Album = () => {
       <HeaderComponent backgroundImage="natalie-cardona-W8BRzoUTHNA-unsplash.jpg">
         <Header>
           <H1>Albums</H1>
-          <H2>Total of x Albums</H2>
+          <H2>Total of {totalAlbums} Albums</H2>
         </Header>
       </HeaderComponent>
       <ContentBox>
@@ -51,7 +53,7 @@ const Album = () => {
             key={index}
             album={album.album}
             artist={album.artist}
-            // albumImage={album.albumImage}
+            albumImage={album.albumPic}
             totalTrack={album.songCount}
             releasedDate={album.createdAt}
           />

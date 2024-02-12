@@ -39,6 +39,7 @@ export type AlbumData = {
   songCount: number;
   createdAt: string;
   album: string;
+  albumPic: string;
 };
 
 export type AlbumInfo = {
