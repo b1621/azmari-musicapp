@@ -4,14 +4,14 @@ import { Song, Artist } from "../utils/types";
 interface InitialState {
   artistsList: Artist[];
   total: number;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 }
 
 const initialState: InitialState = {
   artistsList: [],
   total: 0,
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -20,18 +20,18 @@ const artistSlice = createSlice({
   initialState,
   reducers: {
     getArtists(state) {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     },
     getArtistsSuccess(state, action: PayloadAction<Song[]>) {
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
       state.artistsList = action.payload.artists;
       state.total = action.payload.total;
       console.log("songs action == ", action);
     },
     getArtistsFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
   },

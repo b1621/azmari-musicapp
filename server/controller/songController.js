@@ -103,6 +103,7 @@ exports.getAllArtists = asyncHandler(async (req, res) => {
           _id: "$artist",
           songCount: { $sum: 1 },
           albums: { $addToSet: "$album" },
+          artistPic: { $first: "$artistPic" },
         },
       },
       {
@@ -111,12 +112,13 @@ exports.getAllArtists = asyncHandler(async (req, res) => {
           artist: "$_id",
           songCount: 1,
           albumCount: { $size: "$albums" },
+          artistPic: 1,
         },
       },
     ]);
 
     res.status(200).json({
-      total: artists.length,
+      total: artistsWithSongCount.length,
       artists: artistsWithSongCount,
     });
   } catch (error) {
