@@ -11,6 +11,7 @@ import AddMusic from "./AddMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getSongs } from "../features/songSlice";
+import moment from "moment";
 // Define type for a song item
 interface Song {
   title: string;
@@ -24,6 +25,8 @@ interface Song {
 // Define type for your Redux state
 interface SongsState {
   songslist: Song[];
+  isLoading: boolean;
+  error: string;
 }
 
 const Box = styled.div`
@@ -114,7 +117,9 @@ const Songs = () => {
               </TitleStyled>
             </TableData>
             <TableData>{song.album}</TableData>
-            <TableData>{song.createdAt}</TableData>
+            <TableData>
+              {moment(song.createdAt).format("MMMM Do YYYY, h:mm:ss")}
+            </TableData>
             <TableData>{song.musicDuration}</TableData>
           </TableRow>
         ))}

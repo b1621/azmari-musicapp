@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Song, Artist } from "../utils/types";
+import { Artist } from "../utils/types";
 
 interface InitialState {
   artistsList: Artist[];
@@ -23,7 +23,7 @@ const artistSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getArtistsSuccess(state, action: PayloadAction<Song[]>) {
+    getArtistsSuccess(state, action: PayloadAction<Artist[]>) {
       state.isLoading = false;
       state.error = null;
       state.artistsList = action.payload.artists;

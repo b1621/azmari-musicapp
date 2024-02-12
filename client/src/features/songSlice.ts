@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Song, Artist } from "../utils/types";
 
 interface InitialState {
-  loading: boolean;
+  isLoading: boolean;
   songslist: Song[];
   artistsList: Artist[];
   openAddSongModal: boolean;
@@ -52,7 +52,7 @@ const initialState: InitialState = {
   ],
   totalSongs: 0,
   openAddSongModal: false,
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -64,18 +64,18 @@ const songSlice = createSlice({
       state.songslist.push(action.payload);
     },
     getSongs(state) {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     },
     getSongsSuccess(state, action: PayloadAction<Song[]>) {
-      state.loading = false;
+      state.isLoading = false;
       state.error = null;
       state.songslist = action.payload.songs;
       state.totalSongs = action.payload.total;
       console.log("songs action == ", action);
     },
     getSongsFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
   },
