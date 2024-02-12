@@ -36,32 +36,60 @@ exports.createSong = asyncHandler(async (req, res) => {
     }
 
     // Upload images to Cloudinary
-    console.log("---------------------");
-    console.log(req.files);
+    // console.log("---------------------");
+    // console.log(req.files);
     const albumPic = req.files["albumPic"] ? req.files["albumPic"][0] : null;
     const artistPic = req.files["artistPic"] ? req.files["artistPic"][0] : null;
 
     let albumPicUrl = null;
     let artistPicUrl = null;
 
+    // if (albumPic) {
+    //   const albumPicResult = await cloudinary.uploader.upload(albumPic.path);
+    //   albumPicUrl = albumPicResult.secure_url;
+    // }
+
+    // if (artistPic) {
+    //   const artistPicResult = await cloudinary.uploader.upload(artistPic.path);
+    //   artistPicUrl = artistPicResult.secure_url;
+    // }
+
     if (albumPic) {
-      const albumPicResult = await cloudinary.uploader.upload(albumPic.path);
-      albumPicUrl = albumPicResult.secure_url;
+      console.log("album pic ****", albumPic);
+      try {
+        const albumPicResult = await cloudinary.uploader.upload(albumPic.path);
+        albumPicUrl = albumPicResult.secure_url;
+        // console.log("----- album pic result ", albumPicResult);
+      } catch (error) {
+        console.error("Error uploading album picture:", error);
+        // Handle the error, you may choose to send a response or continue without the image
+      }
     }
 
     if (artistPic) {
-      const artistPicResult = await cloudinary.uploader.upload(artistPic.path);
-      artistPicUrl = artistPicResult.secure_url;
+      // console.log("artist pic ****", artistPic);
+      try {
+        const artistPicResult = await cloudinary.uploader.upload(
+          artistPic.path
+        );
+        artistPicUrl = artistPicResult.secure_url;
+        console.log("----- artist pic result ", artistPicResult);
+      } catch (error) {
+        console.error("Error uploading artist picture:", error);
+        // Handle the error, you may choose to send a response or continue without the image
+      }
     }
 
+    // console.log(" ==== ", albumPicUrl);
+    // console.log(" ==== ", artistPicUrl);
     // Create song record in the database
     const song = await Song.create({
       title,
       album,
       artist,
       genre,
-      albumPicUrl,
-      artistPicUrl,
+      albumPic: albumPicUrl,
+      artistPic: artistPicUrl,
     });
 
     if (song) {
