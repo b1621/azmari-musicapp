@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 const BackgroundOverlay = styled.div`
@@ -96,6 +97,30 @@ const Container = styled.div`
 `;
 
 const AddMusic = ({ setIsOpen }) => {
+  const [formData, setFormData] = useState({
+    title: "",
+    artist: "",
+    album: "",
+    genre: "",
+    albumPic: "",
+    artistPic: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you can do something with the form data, like sending it to an API or processing it.
+    console.log(formData);
+    // Then you might want to close the form
+    setIsOpen(false);
+  };
   return (
     <>
       <BackgroundOverlay />
@@ -106,43 +131,69 @@ const AddMusic = ({ setIsOpen }) => {
           </Close>
         </Header>
         <Title>Add Music</Title>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Container>
-            <>
-              <InputCont>
-                <label htmlFor="title">Title</label>
-                <InputField type="text" id="title" />
-              </InputCont>
-              <InputCont>
-                <label htmlFor="artist">Artist</label>
-                <InputField type="text" id="artist" />
-              </InputCont>
-            </>
-            <>
-              <InputCont>
-                <label htmlFor="album">Album</label>
-                <InputField type="text" id="album" />
-              </InputCont>
-              <InputCont>
-                <label htmlFor="genre">Genre</label>
-                <InputField type="text" id="genre" />
-              </InputCont>
-            </>
-            <>
-              <InputCont>
-                <label htmlFor="albumPic">Album Image</label>
-                <InputFile id="albumPic" type="file" />
-              </InputCont>
-              <InputCont>
-                <label htmlFor="artistPic">Artist Image</label>
-                <InputFile type="file" id="artistPic" />
-              </InputCont>
-            </>
-            <>
-              <InputCont>
-                <Button>+ Add Music</Button>
-              </InputCont>
-            </>
+            <InputCont>
+              <label htmlFor="title">Title</label>
+              <InputField
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="artist">Artist</label>
+              <InputField
+                type="text"
+                id="artist"
+                name="artist"
+                value={formData.artist}
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="album">Album</label>
+              <InputField
+                type="text"
+                id="album"
+                name="album"
+                value={formData.album}
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="genre">Genre</label>
+              <InputField
+                type="text"
+                id="genre"
+                name="genre"
+                value={formData.genre}
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="albumPic">Album Image</label>
+              <InputFile
+                id="albumPic"
+                type="file"
+                name="albumPic"
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="artistPic">Artist Image</label>
+              <InputFile
+                type="file"
+                id="artistPic"
+                name="artistPic"
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <Button type="submit">+ Add Music</Button>
+            </InputCont>
           </Container>
         </form>
       </FormBox>
