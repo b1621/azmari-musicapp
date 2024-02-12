@@ -187,6 +187,7 @@ exports.listAlbums = asyncHandler(async (req, res) => {
           _id: "$album",
           artist: { $first: "$artist" }, // Get the first artist (assuming it's the same for all songs in the album)
           songCount: { $sum: 1 },
+          albumPic: { $first: "$albumPic" },
           createdAt: { $first: "$createdAt" }, // Get the creation time of the first song in the album
         },
       },
@@ -196,6 +197,7 @@ exports.listAlbums = asyncHandler(async (req, res) => {
           album: "$_id",
           artist: 1,
           songCount: 1,
+          albumPic: 1,
           createdAt: 1,
         },
       },

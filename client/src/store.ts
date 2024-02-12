@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import dashboardReducer from "./features/dashboardSlice";
 import songReducer from "./features/songSlice.ts";
 import artistReducer from "./features/artistSlice.ts";
+import albumReducer from "./features/albumSlice.ts";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/rootSaga.ts";
 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     song: songReducer,
     artist: artistReducer,
+    album: albumReducer,
     // dashboard: dashboardReducer,
   },
   middleware: (getDefaultMiddleware) =>

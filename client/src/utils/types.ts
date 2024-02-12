@@ -36,7 +36,7 @@ export type SingleArtist = {
 
 export type AlbumData = {
   artist: string;
-  totalSong: number;
+  songCount: number;
   createdAt: string;
   album: string;
 };
