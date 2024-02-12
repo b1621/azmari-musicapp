@@ -218,9 +218,42 @@ exports.getAlbumSongs = asyncHandler(async (req, res) => {
       album: { $regex: new RegExp(album, "i") },
     });
 
+    // Aggregate additional data about the album
+    const albumData = await Song.aggregate([
+      {
+        $match: { album: { $regex: new RegExp(album, "i") } },
+      },
+      {
+        $group: {
+          _id: "$album",
+          artist: { $first: "$artist" }, // Assuming all songs in the album have the same artist
+          albumPic: { $first: "$albumPic" }, // Assuming the album picture is the same for all songs in the album
+        },
+      },
+      {
+        $project: {
+          albumName: "$_id",
+          artist: 1,
+          albumPic: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    // Extract the aggregated data
+    const [{ albumName, artist, albumPic }] = albumData;
+
+    // Send the response with songs and additional album data
+    res
+      .status(200)
+      .json({ albumName, artist, albumPic, total: songs.length, songs });
+
     res.status(200).json({ total: songs.length, songs });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });
   }
 });
+
+//album
+//albumPic

@@ -10,6 +10,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   albumsList: [],
+  albumDetail: [],
   totalAlbums: 0,
   isLoading: false,
   error: null,
