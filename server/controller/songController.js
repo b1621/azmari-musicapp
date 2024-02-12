@@ -115,7 +115,10 @@ exports.getAllArtists = asyncHandler(async (req, res) => {
       },
     ]);
 
-    res.status(200).json({ artists: artistsWithSongCount });
+    res.status(200).json({
+      total: artists.length,
+      artists: artistsWithSongCount,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
