@@ -16,25 +16,18 @@ export type Artist = {
   artistPic: string;
   totalSongs: number;
 };
-export type OverallStatDto = {
-  totalSongs: number;
-  totalArtists: number;
-  totalAlbums: number;
-  totalGenres: number;
-};
 
-export type GenreSongCountDto = {
-  genre: string;
-  totalSongs: number;
-};
-
-export type ArtistStatDto = {
+export type ArtistData = {
+  title: string;
   artist: string;
-  totalSongs: number;
-  totalAlbums: number;
+  album: string;
+  genre: string;
+  createdAt: string;
+  updatedAt: string;
+  artistPic: string;
 };
 
-export type AlbumSongCountDto = {
-  album: string;
-  totalSongs: number;
+export type SingleArtist = {
+  total: number;
+  songs: ArtistData[];
 };

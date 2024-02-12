@@ -1,15 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Artist } from "../utils/types";
+import { Artist, ArtistData, SingleArtist } from "../utils/types";
 
 interface InitialState {
   artistsList: Artist[];
   total: number;
+  totalSong: number;
   isLoading: boolean;
   error: string | null;
+  artistData: ArtistData | [];
 }
 
 const initialState: InitialState = {
   artistsList: [],
+  artistData: [],
+  totalSong: 0,
   total: 0,
   isLoading: false,
   error: null,
@@ -34,9 +38,30 @@ const artistSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    getArtistData(state) {
+      state.isLoading = true;
+      state.error = null;
+    },
+    getArtistDataSuccess(state, action: PayloadAction<SingleArtist>) {
+      state.isLoading = false;
+      state.error = null;
+      state.artistData = action.payload.songs;
+      state.totalSong = action.payload.total;
+    },
+    getArtistDataFailure(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { getArtists, getArtistsSuccess, getArtistsFailure } =
-  artistSlice.actions;
+export const {
+  getArtists,
+  getArtistsSuccess,
+  getArtistsFailure,
+  getArtistData,
+  getArtistDataFailure,
+  getArtistDataSuccess,
+} = artistSlice.actions;
 export default artistSlice.reducer;

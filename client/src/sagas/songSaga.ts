@@ -1,7 +1,11 @@
 import { takeLatest, put, call, fork } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Song, Artist } from "../utils/types.ts";
-import { fetchAllSongs, fetchAllArtists } from "../httpService/songServices.ts";
+import { Song, Artist, SingleArtist } from "../utils/types.ts";
+import {
+  fetchAllSongs,
+  fetchAllArtists,
+  fetchArtistData,
+} from "../httpService/songServices.ts";
 import {
   getSongs,
   getSongsSuccess,
@@ -11,6 +15,9 @@ import {
   getArtists,
   getArtistsSuccess,
   getArtistsFailure,
+  getArtistData,
+  getArtistDataFailure,
+  getArtistDataSuccess,
 } from "../features/artistSlice.ts";
 
 function* getSongsAsync() {
@@ -44,4 +51,25 @@ function* watchFetchArtists() {
   yield takeLatest(getArtists.type, getArtistsAsync);
 }
 
-export const songSagas = [fork(watchFetchSongs), fork(watchFetchArtists)];
+function* getArtistDataAsync(action: PayloadAction<string>) {
+  try {
+    const artistName: string = action.payload;
+    const artists: SingleArtist = yield call(fetchArtistData, artistName);
+    console.log("artists === ", artists);
+
+    yield put(getArtistDataSuccess(artists));
+  } catch (error) {
+    yield put(getArtistDataFailure(error.message));
+    console.log("error ", error);
+  }
+}
+
+function* watchFetchArtistData() {
+  yield takeLatest(getArtistData.type, getArtistDataAsync);
+}
+
+export const songSagas = [
+  fork(watchFetchSongs),
+  fork(watchFetchArtists),
+  fork(watchFetchArtistData),
+];
