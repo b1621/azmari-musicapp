@@ -30,32 +30,38 @@ exports.createSong = asyncHandler(async (req, res) => {
   try {
     const { title, artist, album, genre } = req.body;
 
-    console.log(req.files);
-    console.log(req.file);
-    console.log(req.body);
-
     if (!title || !artist || !album || !genre) {
       res.status(400);
-      throw new Error("all field should filled!!!");
+      throw new Error("all fields should be filled!!!");
     }
 
-    // Process the uploaded files as needed
-    const musicFile = req.files["music"] ? req.files["music"][0] : null;
-    const albumPhoto = req.files["albumPhoto"]
-      ? req.files["albumPhoto"][0]
-      : null;
-    const artistPhoto = req.files["artistPhoto"]
-      ? req.files["artistPhoto"][0]
-      : null;
+    // Upload images to Cloudinary
+    console.log("---------------------");
+    console.log(req.files);
+    const albumPic = req.files["albumPic"] ? req.files["albumPic"][0] : null;
+    const artistPic = req.files["artistPic"] ? req.files["artistPic"][0] : null;
 
-    console.log("music file ", musicFile);
-    console.log("album phot file ", albumPhoto);
-    console.log("artist photo file ", artistPhoto);
+    let albumPicUrl = null;
+    let artistPicUrl = null;
+
+    if (albumPic) {
+      const albumPicResult = await cloudinary.uploader.upload(albumPic.path);
+      albumPicUrl = albumPicResult.secure_url;
+    }
+
+    if (artistPic) {
+      const artistPicResult = await cloudinary.uploader.upload(artistPic.path);
+      artistPicUrl = artistPicResult.secure_url;
+    }
+
+    // Create song record in the database
     const song = await Song.create({
       title,
       album,
       artist,
       genre,
+      albumPicUrl,
+      artistPicUrl,
     });
 
     if (song) {
@@ -68,9 +74,7 @@ exports.createSong = asyncHandler(async (req, res) => {
       throw new Error("invalid song");
     }
   } catch (error) {
-    res.status(500);
-    console.log(error);
-    throw new Error(error);
+    res.status(500).json({ error: error.message });
   }
 });
 
