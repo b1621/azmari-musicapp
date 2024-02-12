@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import moment from "moment";
 import { useNavigate } from "react-router-dom";
 interface AlbumCoverProps {
   albumImage: string;
@@ -89,7 +90,9 @@ const AlbumComponent = ({
         <ArtistName>{artist}</ArtistName>
         <Div1>
           <NumTrack>{totalTrack} Tracks</NumTrack>
-          <ReleasedDate>{releasedDate}</ReleasedDate>
+          <ReleasedDate>
+            {moment(releasedDate).format("MMMM Do YYYY")}
+          </ReleasedDate>
         </Div1>
       </Content>
     </AlbumBox>
