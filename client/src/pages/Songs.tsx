@@ -4,6 +4,8 @@ import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
 import Button from "../components/Button";
 import HeaderComponent from "../components/HeaderComponent";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import { useState, useEffect } from "react";
 import AddMusic from "./AddMusic";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,7 +68,7 @@ const Songs = () => {
 
   // const dispatch = useDispatch()
   // const { songslist } = useSelector((state: RootState) => state.song);
-  const { songslist } = useSelector(
+  const { songslist, isLoading, error } = useSelector(
     (state: RootState) => state.song
   ) as SongsState;
   // console.log("state == ", songslist);
@@ -76,6 +78,13 @@ const Songs = () => {
     dispatch(getSongs());
   }, [dispatch]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
   return (
     <Box>
       {isOpen && <AddMusic />}
