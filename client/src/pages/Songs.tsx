@@ -71,7 +71,7 @@ const Songs = () => {
 
   // const dispatch = useDispatch()
   // const { songslist } = useSelector((state: RootState) => state.song);
-  const { songslist, isLoading, error } = useSelector(
+  const { songslist, totalSongs, isLoading, error } = useSelector(
     (state: RootState) => state.song
   ) as SongsState;
   // console.log("state == ", songslist);
@@ -90,12 +90,12 @@ const Songs = () => {
   }
   return (
     <Box>
-      {isOpen && <AddMusic />}
+      {isOpen && <AddMusic setIsOpen={setIsOpen} />}
       <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
         {/* <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg"> */}
         <Header>
           <H1>Songs</H1>
-          <H2>Total of x Songs</H2>
+          <H2>Total of {totalSongs} Songs</H2>
         </Header>
       </HeaderComponent>
       <HeaderStyled>
@@ -121,7 +121,7 @@ const Songs = () => {
             <TableData>{song.album}</TableData>
             <TableData>{song.genre}</TableData>
             <TableData>
-              {moment(song.createdAt).format("MMMM Do YYYY, h:mm:ss")}
+              {moment(song.createdAt).format("MMMM Do YYYY")}
             </TableData>
             <TableData>{song.musicDuration}</TableData>
           </TableRow>
