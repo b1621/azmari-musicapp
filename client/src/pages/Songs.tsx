@@ -4,10 +4,11 @@ import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
 import Button from "../components/Button";
 import HeaderComponent from "../components/HeaderComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddMusic from "./AddMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import { getSongs } from "../features/songSlice";
 // Define type for a song item
 interface Song {
   title: string;
@@ -69,6 +70,11 @@ const Songs = () => {
     (state: RootState) => state.song
   ) as SongsState;
   // console.log("state == ", songslist);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSongs());
+  }, [dispatch]);
 
   return (
     <Box>

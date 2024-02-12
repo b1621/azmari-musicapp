@@ -6,6 +6,7 @@ interface InitialState {
   songslist: Song[];
   artistsList: Artist[];
   openAddSongModal: boolean;
+  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -79,6 +80,7 @@ const initialState: InitialState = {
   ],
   openAddSongModal: false,
   loading: false,
+  error: null,
 };
 
 const songSlice = createSlice({
@@ -88,17 +90,23 @@ const songSlice = createSlice({
     addSong(state, action) {
       state.songslist.push(action.payload);
     },
-    getSongs: (state) => {
+    getSongs(state) {
       state.loading = true;
+      state.error = null;
     },
-    getSongsSuccess: (state, action: PayloadAction<Song[]>) => {
+    getSongsSuccess(state, action: PayloadAction<Song[]>) {
       state.loading = false;
-      console.log("get songs action ", action);
-
-      // state.songslist = action.payload;
+      state.error = null;
+      state.songslist = action.payload;
+      console.log("songs action == ", action);
+    },
+    getSongsFailure(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });
 
-export const { addSong, getSongs, getSongsSuccess } = songSlice.actions;
+export const { addSong, getSongs, getSongsSuccess, getSongsFailure } =
+  songSlice.actions;
 export default songSlice.reducer;
