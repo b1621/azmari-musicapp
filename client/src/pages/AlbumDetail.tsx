@@ -3,6 +3,11 @@ import HeaderComponent from "../components/HeaderComponent";
 import TableLayout from "../components/TableLayout";
 import TableRow from "../components/TableRow";
 import TableData from "../components/TableData";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { getAlbumDetail } from "../features/albumSlice";
+import { RootState } from "../store";
 
 const songsList = [
   {
@@ -59,6 +64,14 @@ const Content = styled.div`
   padding: 30px;
 `;
 const AlbumDetail = () => {
+  const dispatch = useDispatch();
+  const { album } = useParams();
+
+  const { isLoading, error } = useSelector((state: RootState) => state.album);
+
+  useEffect(() => {
+    dispatch(getAlbumDetail(album));
+  }, [dispatch]);
   return (
     <Box>
       <HeaderComponent backgroundImage="">
