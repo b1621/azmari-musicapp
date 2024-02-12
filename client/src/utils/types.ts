@@ -29,5 +29,7 @@ export type ArtistData = {
 
 export type SingleArtist = {
   total: number;
+  totalAlbums: number;
+  artistPic: string;
   songs: ArtistData[];
 };

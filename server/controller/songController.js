@@ -129,13 +129,50 @@ exports.getAllArtists = asyncHandler(async (req, res) => {
 
 exports.getArtistSongs = asyncHandler(async (req, res) => {
   try {
+    // const artist = req.params.artistName;
+
+    // const songs = await Song.find({
+    //   artist: { $regex: new RegExp(artist, "i") },
+    // });
+
+    // res.status(200).json({ total: songs.length, songs });
+
     const artist = req.params.artistName;
 
+    // Retrieve songs by the artist
     const songs = await Song.find({
       artist: { $regex: new RegExp(artist, "i") },
     });
 
-    res.status(200).json({ total: songs.length, songs });
+    // Aggregate additional data about the artist
+    const artistData = await Song.aggregate([
+      {
+        $match: { artist: { $regex: new RegExp(artist, "i") } },
+      },
+      {
+        $group: {
+          _id: "$artist",
+          uniqueAlbums: { $addToSet: "$album" },
+          artistPic: { $first: "$artistPic" },
+        },
+      },
+      {
+        $project: {
+          artistName: "$_id",
+          totalAlbums: { $size: "$uniqueAlbums" },
+          artistPic: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    // Extract the aggregated data
+    const [{ _id: artistName, totalAlbums, artistPic }] = artistData;
+
+    // Send the response with songs and additional artist data
+    res
+      .status(200)
+      .json({ artistName, totalAlbums, artistPic, total: songs.length, songs });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });

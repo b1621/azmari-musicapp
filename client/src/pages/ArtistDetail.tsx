@@ -72,9 +72,8 @@ const ArtistDetail = () => {
   const dispatch = useDispatch();
   const { artist } = useParams();
 
-  const { artistData, isLoading, error } = useSelector(
-    (state: RootState) => state.artist
-  );
+  const { artistData, totalSong, totalAlbums, artistPic, isLoading, error } =
+    useSelector((state: RootState) => state.artist);
   useEffect(() => {
     dispatch(getArtistData(artist));
   }, [dispatch]);
@@ -82,11 +81,13 @@ const ArtistDetail = () => {
     <Box>
       <HeaderComponent backgroundImage="">
         <Header>
-          <ArtistImage src="https://www.okayafrica.com/media-library/rophnan-sidist.jpg?id=30180718&width=1245&height=700&quality=85&coordinates=0%2C437%2C0%2C437" />
+          <ArtistImage src={artistPic} />
           <ArtistInfo>
             <div>Artist</div>
-            <AlbumTitle>Rophnan</AlbumTitle>
-            <div>1 Album - 12 songs</div>
+            <AlbumTitle>{artist}</AlbumTitle>
+            <div>
+              {totalAlbums} Album - {totalSong} songs
+            </div>
           </ArtistInfo>
         </Header>
       </HeaderComponent>{" "}

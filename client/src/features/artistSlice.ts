@@ -7,12 +7,16 @@ interface InitialState {
   totalSong: number;
   isLoading: boolean;
   error: string | null;
+  totalAlbums: number;
+  artistPic: string;
   artistData: ArtistData | [];
 }
 
 const initialState: InitialState = {
   artistsList: [],
   artistData: [],
+  totalAlbums: 0,
+  artistPic: "",
   totalSong: 0,
   total: 0,
   isLoading: false,
@@ -48,6 +52,8 @@ const artistSlice = createSlice({
       state.error = null;
       state.artistData = action.payload.songs;
       state.totalSong = action.payload.total;
+      state.artistPic = action.payload.artistPic;
+      state.totalAlbums = action.payload.totalAlbums;
     },
     getArtistDataFailure(state, action: PayloadAction<string>) {
       state.isLoading = false;
