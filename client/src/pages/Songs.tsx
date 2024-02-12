@@ -96,7 +96,7 @@ const Songs = () => {
             <TableData>
               <TitleStyled>
                 <div>
-                  <AritstImage src={song.artistPhoto} />
+                  <AritstImage src={song.artistPic} />
                 </div>
                 <div>
                   <h2>{song.title}</h2>
@@ -105,7 +105,7 @@ const Songs = () => {
               </TitleStyled>
             </TableData>
             <TableData>{song.album}</TableData>
-            <TableData>{song.dateAdded}</TableData>
+            <TableData>{song.createdAt}</TableData>
             <TableData>{song.musicDuration}</TableData>
           </TableRow>
         ))}
