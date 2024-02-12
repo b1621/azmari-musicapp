@@ -101,7 +101,9 @@ const Songs = () => {
       <HeaderStyled>
         <Button handleClick={handleClick}>+ Add Task</Button>
       </HeaderStyled>
-      <TableLayout headerList={["#", "title", "album", "released date"]}>
+      <TableLayout
+        headerList={["#", "Title", "Album", "Genre", "Released date"]}
+      >
         {songslist.map((song: Song, index: number) => (
           <TableRow key={index}>
             <TableData>{index + 1}</TableData>
@@ -117,6 +119,7 @@ const Songs = () => {
               </TitleStyled>
             </TableData>
             <TableData>{song.album}</TableData>
+            <TableData>{song.genre}</TableData>
             <TableData>
               {moment(song.createdAt).format("MMMM Do YYYY, h:mm:ss")}
             </TableData>

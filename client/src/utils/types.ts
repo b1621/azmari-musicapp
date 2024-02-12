@@ -33,3 +33,15 @@ export type SingleArtist = {
   artistPic: string;
   songs: ArtistData[];
 };
+
+export type AlbumData = {
+  artist: string;
+  totalSong: number;
+  createdAt: string;
+  album: string;
+};
+
+export type AlbumInfo = {
+  total: number;
+  albums: AlbumData[];
+};

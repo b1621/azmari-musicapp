@@ -8,33 +8,9 @@ import { useEffect } from "react";
 import { getArtistData } from "../features/artistSlice";
 import { useParams } from "react-router-dom";
 import { RootState } from "../store";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
-// const songsList = [
-//   {
-//     id: 1,
-//     title: "qal",
-//     album: "six",
-//     musicDuration: "3:30",
-//   },
-//   {
-//     id: 2,
-//     title: "fole",
-//     album: "six",
-//     musicDuration: "3:10",
-//   },
-//   {
-//     id: 3,
-//     title: "dese",
-//     album: "six",
-//     musicDuration: "2:50",
-//   },
-//   {
-//     id: 4,
-//     title: "haya",
-//     album: "six",
-//     musicDuration: "4:30",
-//   },
-// ];
 const Box = styled.div`
   padding: 10px;
   width: 100%;
@@ -77,6 +53,14 @@ const ArtistDetail = () => {
   useEffect(() => {
     dispatch(getArtistData(artist));
   }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
   return (
     <Box>
       <HeaderComponent backgroundImage="">
@@ -92,12 +76,13 @@ const ArtistDetail = () => {
         </Header>
       </HeaderComponent>{" "}
       <Content>
-        <TableLayout headerList={["#", "Title", "Album", "Duration"]}>
+        <TableLayout headerList={["#", "Title", "Album", "genre", "Duration"]}>
           {artistData.map((song, index) => (
             <TableRow key={index}>
               <TableData> {index + 1}</TableData>
               <TableData> {song.title}</TableData>
               <TableData> {song.album}</TableData>
+              <TableData> {song.genre}</TableData>
               <TableData> {song?.musicDuration}</TableData>
             </TableRow>
           ))}
