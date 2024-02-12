@@ -7,6 +7,7 @@ interface InitialState {
   artistsList: Artist[];
   openAddSongModal: boolean;
   error: string | null;
+  totalSongs: number;
 }
 
 const initialState: InitialState = {
@@ -78,6 +79,7 @@ const initialState: InitialState = {
       totalSongs: 55,
     },
   ],
+  totalSongs: 0,
   openAddSongModal: false,
   loading: false,
   error: null,
@@ -97,7 +99,8 @@ const songSlice = createSlice({
     getSongsSuccess(state, action: PayloadAction<Song[]>) {
       state.loading = false;
       state.error = null;
-      state.songslist = action.payload;
+      state.songslist = action.payload.songs;
+      state.totalSongs = action.payload.total;
       console.log("songs action == ", action);
     },
     getSongsFailure(state, action: PayloadAction<string>) {
