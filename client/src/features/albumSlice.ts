@@ -64,6 +64,12 @@ const albumSlice = createSlice({
   },
 });
 
-export const { getAlbumsList, getAlbumsListSuccess, getAlbumsListFailure } =
-  albumSlice.actions;
+export const {
+  getAlbumsList,
+  getAlbumsListSuccess,
+  getAlbumsListFailure,
+  getAlbumDetail,
+  getAlbumDetailFailure,
+  getAlbumDetailSuccess,
+} = albumSlice.actions;
 export default albumSlice.reducer;

@@ -1,11 +1,18 @@
 import { takeLatest, put, call, fork } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Song, Artist, SingleArtist, AlbumInfo } from "../utils/types.ts";
+import {
+  Song,
+  Artist,
+  SingleArtist,
+  AlbumInfo,
+  AlbumDetail,
+} from "../utils/types.ts";
 import {
   fetchAllSongs,
   fetchAllArtists,
   fetchArtistData,
   fetchAllAlbums,
+  fetchAlbumDetail,
 } from "../httpService/songServices.ts";
 import {
   getSongs,
@@ -22,8 +29,11 @@ import {
 } from "../features/artistSlice.ts";
 import {
   getAlbumsList,
-  getAlbumsListFailure,
   getAlbumsListSuccess,
+  getAlbumsListFailure,
+  getAlbumDetail,
+  getAlbumDetailFailure,
+  getAlbumDetailSuccess,
 } from "../features/albumSlice.ts";
 
 function* getSongsAsync() {
@@ -57,6 +67,7 @@ function* watchFetchArtists() {
   yield takeLatest(getArtists.type, getArtistsAsync);
 }
 
+// single artist detail
 function* getArtistDataAsync(action: PayloadAction<string>) {
   try {
     const artistName: string = action.payload;
@@ -90,9 +101,28 @@ function* getAlbumsAsync() {
 function* watchFetchAlbums() {
   yield takeLatest(getAlbumsList.type, getAlbumsAsync);
 }
+
+// single album detail
+function* getAlbumDetailAsync(action: PayloadAction<string>) {
+  try {
+    const albumName: string = action.payload;
+    const albumDetail: AlbumDetail = yield call(fetchAlbumDetail, albumName);
+    console.log("albumDetail === ", albumDetail);
+
+    yield put(getAlbumDetailSuccess(albumDetail));
+  } catch (error) {
+    yield put(getAlbumDetailFailure(error.message));
+    console.log("error ", error);
+  }
+}
+
+function* watchFetchAlbumDetail() {
+  yield takeLatest(getAlbumDetail.type, getAlbumDetailAsync);
+}
 export const songSagas = [
   fork(watchFetchSongs),
   fork(watchFetchArtists),
   fork(watchFetchArtistData),
   fork(watchFetchAlbums),
+  fork(watchFetchAlbumDetail),
 ];
