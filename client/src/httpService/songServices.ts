@@ -45,9 +45,13 @@ export const fetchAlbumDetail = (album: string): Promise<AlbumDetail> => {
 export const createNewMusicToServer = (music: Music): Promise<MusicCreated> => {
   console.log("sent data === ", music);
 
-  if (music._id) delete music._id;
+  // if (music._id) delete music._id;
 
-  const result = axiosClient.post(`/song/`, music) as Promise<MusicCreated>;
+  const result = axiosClient.post(`/song/`, music, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }) as Promise<MusicCreated>;
   console.log("fetch album result == ", result);
 
   return result;

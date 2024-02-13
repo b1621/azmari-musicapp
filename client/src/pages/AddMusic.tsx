@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addNewMusic } from "../features/songSlice";
 import axios from "axios";
+import { createNewMusicToServer } from "../httpService/songServices";
 
 const BackgroundOverlay = styled.div`
   position: absolute;
@@ -110,89 +111,53 @@ const Container = styled.div`
 
 const AddMusic = ({ setIsOpen }) => {
   const dispatch = useDispatch();
-  // const formDatasToSend = new FormData();
-  const [albumPic, setAlbumPic] = useState(null);
-  const [artistPic, setArtistPic] = useState(null);
   const [formDatas, setFormDatas] = useState({
     title: "",
     artist: "",
     album: "",
     genre: "",
-    // albumPic: null,
-    // artistPic: null,
+    albumPic: null,
+    artistPic: null,
     musicDuration: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormDatas({
-      ...formDatas,
-      [name]: value,
-    });
-    // const { name, value, files } = e.target;
-    // if (files && files.length) {
-    //   setFormDatas({
-    //     ...formDatas,
-    //     [name]: files[0], // Use the first file selected by the user
-    //   });
-    // } else {
-    //   setFormDatas({
-    //     ...formDatas,
-    //     [name]: value,
-    //   });
-    // }
+    const { name, value, files } = e.target;
+    if (files && files.length) {
+      setFormDatas({
+        ...formDatas,
+        [name]: files[0], // Use the first file selected by the user
+      });
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // formDatasToSend.append(formDatas);
-    // Here you can do something with the form data, like sending it to an API or processing it.
-    console.log("fomr datas  = ", formDatas);
-    console.log("albumpic == ", albumPic);
-    console.log("artistPic == ", artistPic);
-
-    // console.log("fomr data to send = ", formDatasToSend);
-    // Then you might want to close the form
-
-    // console.log("aaaaaa final = ", {
-    //   ...formDatas,
-    //   albumPic: albumPic
-    //     ? { name: albumPic.name, type: albumPic.type, size: artistPic.size }
-    //     : null,
-    //   artistPic: artistPic
-    //     ? { name: artistPic.name, type: artistPic.type, size: artistPic.size }
-    //     : null,
-    // });
-
-    // dispatch(
-    //   addNewMusic({
-    //     ...formDatas,
-    //     albumPic: albumPic
-    //       ? { name: albumPic.name, type: albumPic.type, size: albumPic.size }
-    //       : null,
-    //     artistPic: artistPic
-    //       ? { name: artistPic.name, type: artistPic.type, size: artistPic.size }
-    //       : null,
-    //   })
-    // );
-    const somevalue = { ...formDatas, albumPic, artistPic };
-    console.log("some value -=== ", somevalue);
 
     const formData = new FormData();
-    Object.keys(somevalue).forEach((key) => {
-      formData.append(key, somevalue[key]);
+    Object.keys(formDatas).forEach((key) => {
+      formData.append(key, formDatas[key]);
     });
 
     console.log("formdata coverted ==== ", formData);
 
     // dispatch(addNewMusic(formData));
     try {
-      const response = await axios.post("/api/v1/song/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Response:", response.data);
+      // const response = await axios.post("/api/v1/song/", formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      // const response = await createNewMusicToServer(formData);
+      // const newSong = await response.data.song;
+
+      // console.log("Response:", response.data);
+      dispatch(addNewMusic(formData));
       setIsOpen(false);
     } catch (error) {
       console.error("Error:", error);
@@ -275,9 +240,7 @@ const AddMusic = ({ setIsOpen }) => {
                 id="albumPic"
                 type="file"
                 name="albumPic"
-                onChange={(e) => {
-                  setAlbumPic(e.target.files[0]);
-                }}
+                onChange={handleInputChange}
               />
             </InputCont>
             <InputCont>
@@ -286,9 +249,7 @@ const AddMusic = ({ setIsOpen }) => {
                 type="file"
                 id="artistPic"
                 name="artistPic"
-                onChange={(e) => {
-                  setArtistPic(e.target.files[0]);
-                }}
+                onChange={handleInputChange}
               />
             </InputCont>
           </Container>
