@@ -135,6 +135,7 @@ exports.deleteSong = asyncHandler(async (req, res) => {
 
     res.status(201).json({
       message: "song deleted !!",
+      songId: songId,
     });
   } catch (error) {
     res.status(500);

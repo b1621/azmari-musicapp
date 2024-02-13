@@ -7,6 +7,7 @@ import {
   AlbumInfo,
   AlbumDetail,
   Music,
+  SongDelete,
 } from "../utils/types.ts";
 import {
   fetchAllSongs,
@@ -15,6 +16,7 @@ import {
   fetchAllAlbums,
   fetchAlbumDetail,
   createNewMusicToServer,
+  deleteSongServer,
 } from "../httpService/songServices.ts";
 import {
   getSongs,
@@ -23,6 +25,9 @@ import {
   addNewMusic,
   addNewMusicSuccess,
   addNewMusicFailure,
+  deleteMusic,
+  deleteMusicFailure,
+  deleteMusicSuccess,
 } from "../features/songSlice.ts";
 import {
   getArtists,
@@ -145,6 +150,24 @@ function* watchCreateSong() {
   yield takeLatest(addNewMusic.type, createMusicAsync);
 }
 
+// delete song
+function* deleteMusicAsync(action: PayloadAction<string>) {
+  try {
+    const songId: string = action.payload;
+    const deletedsong: SongDelete = yield call(deleteSongServer, songId);
+    console.log("deletedsong === ", deletedsong);
+
+    yield put(deleteMusicSuccess(deletedsong));
+  } catch (error) {
+    yield put(deleteMusicFailure(error.message));
+    console.log("error ", error);
+  }
+}
+
+function* watchDeleteMusicAsync() {
+  yield takeLatest(deleteMusic.type, deleteMusicAsync);
+}
+
 export const songSagas = [
   fork(watchFetchSongs),
   fork(watchFetchArtists),
@@ -152,4 +175,5 @@ export const songSagas = [
   fork(watchFetchAlbums),
   fork(watchFetchAlbumDetail),
   fork(watchCreateSong),
+  fork(watchDeleteMusicAsync),
 ];

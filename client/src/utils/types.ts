@@ -80,3 +80,8 @@ export type MusicCreated = {
   message: string;
   song: Song;
 };
+
+export type SongDelete = {
+  message: string;
+  songId: string;
+};

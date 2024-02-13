@@ -5,6 +5,7 @@ import {
   AlbumDetail,
   Music,
   MusicCreated,
+  SongDelete,
 } from "../utils/types";
 
 import axiosClient from "./axiosClient";
@@ -52,6 +53,13 @@ export const createNewMusicToServer = (music: Music): Promise<MusicCreated> => {
       "Content-Type": "multipart/form-data",
     },
   }) as Promise<MusicCreated>;
+  console.log("fetch album result == ", result);
+
+  return result;
+};
+
+export const deleteSongServer = (songId: string): Promise<SongDelete> => {
+  const result = axiosClient.delete(`/song/${songId}`) as Promise<SongDelete>;
   console.log("fetch album result == ", result);
 
   return result;

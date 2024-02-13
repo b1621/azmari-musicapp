@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import AddMusic from "./AddMusic";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
-import { getSongs } from "../features/songSlice";
+import { deleteMusic, getSongs } from "../features/songSlice";
 import moment from "moment";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeleteModal from "../components/DeleteModal";
@@ -74,8 +74,14 @@ const DeleteButton = styled.button`
 const Songs = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [singleSong, setSingleSong] = useState({});
   const handleClick = () => {
     setIsOpen(true);
+  };
+
+  const handleConfirm = () => {
+    dispatch(deleteMusic(singleSong._id));
+    setIsDeleteOpen(false);
   };
 
   // const dispatch = useDispatch()
@@ -100,7 +106,12 @@ const Songs = () => {
   return (
     <Box>
       {isOpen && <AddMusic setIsOpen={setIsOpen} />}
-      {isDeleteOpen && <DeleteModal setIsDeleteOpen={setIsDeleteOpen} />}
+      {isDeleteOpen && (
+        <DeleteModal
+          handleConfirm={handleConfirm}
+          setIsDeleteOpen={setIsDeleteOpen}
+        />
+      )}
       <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
         {/* <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg"> */}
         <Header>
@@ -144,7 +155,12 @@ const Songs = () => {
 
             <TableData>{song.musicDuration}</TableData>
             <TableData>
-              <DeleteButton onClick={() => setIsDeleteOpen(true)}>
+              <DeleteButton
+                onClick={() => {
+                  setIsDeleteOpen(true);
+                  setSingleSong(song);
+                }}
+              >
                 <RiDeleteBin6Line size={21} />
               </DeleteButton>
             </TableData>
