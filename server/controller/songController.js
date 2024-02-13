@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
-
+const path = require("path");
 const Song = require("../model/songModel");
 
 const cloudinary = require("cloudinary").v2;
@@ -64,6 +64,21 @@ exports.createSong = asyncHandler(async (req, res) => {
         console.error("Error uploading album picture:", error);
         // Handle the error, you may choose to send a response or continue without the image
       }
+    } else {
+      // const localAlbumPic = path.join(
+      //   __dirname,
+      //   "/images/realistic-music-record-label-dis.jpg"
+      // );
+      try {
+        // const albumPicResult = await cloudinary.uploader.upload(localAlbumPic);
+        // albumPicUrl = albumPicResult.secure_url;
+        albumPicUrl =
+          "https://res.cloudinary.com/de17diqhx/image/upload/v1707851450/tmsjqgkoaphpplwqmlhg.jpg";
+        // console.log("----- album pic result ", albumPicResult);
+      } catch (error) {
+        console.error("Error uploading local album picture:", error);
+        // Handle the error, you may choose to send a response or continue without the image
+      }
     }
 
     if (artistPic) {
@@ -76,6 +91,19 @@ exports.createSong = asyncHandler(async (req, res) => {
         console.log("----- artist pic result ", artistPicResult);
       } catch (error) {
         console.error("Error uploading artist picture:", error);
+        // Handle the error, you may choose to send a response or continue without the image
+      }
+    } else {
+      // const localArtistPic = path.join(
+      //   __dirname,
+      //   "/images/photo-1589903308904-1010c2294adc.jpg"
+      // );
+      try {
+        artistPicUrl =
+          "https://res.cloudinary.com/de17diqhx/image/upload/v1707851454/jtr4ybzahkgqfav9xyxg.jpg";
+        // console.log("----- album pic result ", albumPicResult);
+      } catch (error) {
+        console.error("Error uploading local artist picture:", error);
         // Handle the error, you may choose to send a response or continue without the image
       }
     }
