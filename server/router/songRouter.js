@@ -33,19 +33,22 @@ const fileFilter = (req, file, cb) => {
   if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file type. Only webp files are allowed."), false);
+    cb(new Error("Invalid file type. these file type not allowed."), false);
   }
 };
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-router.route("/").post(
-  upload.fields([
-    { name: "albumPic", maxCount: 1 },
-    { name: "artistPic", maxCount: 1 },
-  ]),
-  createSong
-);
+router
+  .route("/")
+  .get(getAllSongs)
+  .post(
+    upload.fields([
+      { name: "albumPic", maxCount: 1 },
+      { name: "artistPic", maxCount: 1 },
+    ]),
+    createSong
+  );
 
 router.route("/:songId").delete(deleteSong);
 module.exports = router;

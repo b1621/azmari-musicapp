@@ -67,7 +67,8 @@ const AlbumDetail = () => {
   const dispatch = useDispatch();
   const { album } = useParams();
 
-  const { isLoading, error } = useSelector((state: RootState) => state.album);
+  const { albumSongs, albumPic, artist, totalSongs, isLoading, error } =
+    useSelector((state: RootState) => state.album);
 
   useEffect(() => {
     dispatch(getAlbumDetail(album));
@@ -76,20 +77,23 @@ const AlbumDetail = () => {
     <Box>
       <HeaderComponent backgroundImage="">
         <Header>
-          <AlbumImage src="https://www.okayafrica.com/media-library/rophnan-sidist.jpg?id=30180718&width=1245&height=700&quality=85&coordinates=0%2C437%2C0%2C437" />
+          <AlbumImage src={albumPic} />
           <AlbumInfo>
             <div>Album</div>
-            <AlbumTitle>Six 6</AlbumTitle>
-            <div>Rophnan - 2023 - 12songs</div>
+            <AlbumTitle>{album}</AlbumTitle>
+            <div>
+              {artist} - 2023 - {totalSongs} songs
+            </div>
           </AlbumInfo>
         </Header>
       </HeaderComponent>
       <Content>
-        <TableLayout headerList={["#", "Title", "Duration"]}>
-          {songsList.map((song, index) => (
+        <TableLayout headerList={["#", "Title", "Genre", "Duration"]}>
+          {albumSongs.map((song, index) => (
             <TableRow key={index}>
               <TableData> {index + 1}</TableData>
               <TableData> {song.title}</TableData>
+              <TableData> {song.genre}</TableData>
               <TableData> {song.musicDuration}</TableData>
             </TableRow>
           ))}
