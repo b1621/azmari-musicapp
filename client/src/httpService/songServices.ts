@@ -1,4 +1,11 @@
-import { Song, SingleArtist, AlbumInfo, AlbumDetail } from "../utils/types";
+import {
+  Song,
+  SingleArtist,
+  AlbumInfo,
+  AlbumDetail,
+  Music,
+  MusicCreated,
+} from "../utils/types";
 
 import axiosClient from "./axiosClient";
 
@@ -30,6 +37,17 @@ export const fetchAllAlbums = (): Promise<AlbumInfo> => {
 
 export const fetchAlbumDetail = (album: string): Promise<AlbumDetail> => {
   const result = axiosClient.get(`/album/${album}`) as Promise<AlbumDetail>;
+  console.log("fetch album result == ", result);
+
+  return result;
+};
+
+export const createNewMusicToServer = (music: Music): Promise<MusicCreated> => {
+  console.log("sent data === ", music);
+
+  if (music._id) delete music._id;
+
+  const result = axiosClient.post(`/song/`, music) as Promise<MusicCreated>;
   console.log("fetch album result == ", result);
 
   return result;

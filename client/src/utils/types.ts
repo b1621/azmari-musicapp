@@ -2,13 +2,13 @@ export type GenreBarChartDto = { genre: string; totalSongs: number };
 
 export type Song = {
   _id?: string;
-  title: string;
-  artist: string;
-  artistPhoto: string;
-  album: string;
-  dateAdded: string;
-  musicDuration: string;
   totalTrack?: number;
+  musicDuration: string;
+  genre: string;
+  createdAt: string;
+  updatedAt: string;
+  artistPic: string;
+  albumPic: string;
 };
 
 export type Artist = {
@@ -62,5 +62,21 @@ export type AlbumDetail = {
   artist: string;
   albumPic: string;
   total: number;
-  songs: AlbumSong[];
+  songs: Song[];
+};
+
+export type Music = {
+  _id?: string;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+  musicDuration: string;
+  artistPic: object | null;
+  albumPic: object | null;
+};
+
+export type MusicCreated = {
+  message: string;
+  song: Song;
 };

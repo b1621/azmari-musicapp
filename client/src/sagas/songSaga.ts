@@ -6,6 +6,7 @@ import {
   SingleArtist,
   AlbumInfo,
   AlbumDetail,
+  Music,
 } from "../utils/types.ts";
 import {
   fetchAllSongs,
@@ -13,11 +14,15 @@ import {
   fetchArtistData,
   fetchAllAlbums,
   fetchAlbumDetail,
+  createNewMusicToServer,
 } from "../httpService/songServices.ts";
 import {
   getSongs,
   getSongsSuccess,
   getSongsFailure,
+  addNewMusic,
+  addNewMusicSuccess,
+  addNewMusicFailure,
 } from "../features/songSlice.ts";
 import {
   getArtists,
@@ -35,6 +40,7 @@ import {
   getAlbumDetailFailure,
   getAlbumDetailSuccess,
 } from "../features/albumSlice.ts";
+import { toast } from "react-toastify";
 
 function* getSongsAsync() {
   try {
@@ -119,10 +125,31 @@ function* getAlbumDetailAsync(action: PayloadAction<string>) {
 function* watchFetchAlbumDetail() {
   yield takeLatest(getAlbumDetail.type, getAlbumDetailAsync);
 }
+
+// create music
+function* createMusicAsync({ payload }: PayloadAction<Music>) {
+  try {
+    const songPayload = payload;
+    const song: Music = yield call(createNewMusicToServer, songPayload);
+    console.log("create music ===", song);
+
+    yield put(addNewMusicSuccess(song));
+    toast.success("Song Added Success");
+  } catch (error) {
+    yield put(addNewMusicFailure(error.message));
+    toast.error("creating song failed");
+  }
+}
+
+function* watchCreateSong() {
+  yield takeLatest(addNewMusic.type, createMusicAsync);
+}
+
 export const songSagas = [
   fork(watchFetchSongs),
   fork(watchFetchArtists),
   fork(watchFetchArtistData),
   fork(watchFetchAlbums),
   fork(watchFetchAlbumDetail),
+  fork(watchCreateSong),
 ];
