@@ -28,7 +28,7 @@ exports.getAllSongs = asyncHandler(async (req, res) => {
 });
 exports.createSong = asyncHandler(async (req, res) => {
   try {
-    const { title, artist, album, genre } = req.body;
+    const { title, artist, album, genre, musicDuration } = req.body;
 
     if (!title || !artist || !album || !genre) {
       res.status(400);
@@ -90,6 +90,7 @@ exports.createSong = asyncHandler(async (req, res) => {
       genre,
       albumPic: albumPicUrl,
       artistPic: artistPicUrl,
+      musicDuration: musicDuration,
     });
 
     if (song) {

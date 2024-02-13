@@ -39,6 +39,10 @@ const Close = styled.button`
   color: white;
   border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 const InputCont = styled.div`
   display: flex;
@@ -82,12 +86,17 @@ const InputFile = styled.input`
 
 const Button = styled.button`
   border: none;
+  margin: 20px 10px;
   cursor: pointer;
-  background-color: #d27e4e;
-  padding: 10px 0;
+  border: 1px solid #d27e4e;
 
+  background-color: transparent;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
   &:hover {
-    background-color: #d27c4c;
+    background-color: #d27e4e;
   }
 `;
 const Container = styled.div`
@@ -104,6 +113,7 @@ const AddMusic = ({ setIsOpen }) => {
     genre: "",
     albumPic: "",
     artistPic: "",
+    musicDuration: "",
   });
 
   const handleInputChange = (e) => {
@@ -139,6 +149,7 @@ const AddMusic = ({ setIsOpen }) => {
                 type="text"
                 id="title"
                 name="title"
+                placeholder="music title"
                 value={formData.title}
                 onChange={handleInputChange}
               />
@@ -149,6 +160,7 @@ const AddMusic = ({ setIsOpen }) => {
                 type="text"
                 id="artist"
                 name="artist"
+                placeholder="artist name"
                 value={formData.artist}
                 onChange={handleInputChange}
               />
@@ -159,6 +171,7 @@ const AddMusic = ({ setIsOpen }) => {
                 type="text"
                 id="album"
                 name="album"
+                placeholder="album "
                 value={formData.album}
                 onChange={handleInputChange}
               />
@@ -169,7 +182,19 @@ const AddMusic = ({ setIsOpen }) => {
                 type="text"
                 id="genre"
                 name="genre"
+                placeholder="pop"
                 value={formData.genre}
+                onChange={handleInputChange}
+              />
+            </InputCont>
+            <InputCont>
+              <label htmlFor="musicDuration">Music Duration</label>
+              <InputField
+                type="text"
+                id="musicDuration"
+                name="musicDuration"
+                placeholder="0:00"
+                value={formData.musicDuration}
                 onChange={handleInputChange}
               />
             </InputCont>
@@ -191,10 +216,9 @@ const AddMusic = ({ setIsOpen }) => {
                 onChange={handleInputChange}
               />
             </InputCont>
-            <InputCont>
-              <Button type="submit">+ Add Music</Button>
-            </InputCont>
           </Container>
+
+          <Button type="submit">+ Add Music</Button>
         </form>
       </FormBox>
     </>
