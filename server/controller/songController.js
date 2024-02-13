@@ -93,6 +93,21 @@ exports.createSong = asyncHandler(async (req, res) => {
       musicDuration: musicDuration,
     });
 
+    const filesToDelete = [];
+    if (req.files && req.files.albumPic) {
+      filesToDelete.push(req.files.albumPic[0].path);
+    }
+    if (req.files && req.files.artistPic) {
+      filesToDelete.push(req.files.artistPic[0].path);
+    }
+
+    try {
+      await Promise.all(
+        filesToDelete.map((filePath) => fs.promises.unlink(filePath))
+      );
+    } catch (error) {
+      console.error("Error deleting files:", error);
+    }
     if (song) {
       res.status(201).json({
         message: "song is created",
