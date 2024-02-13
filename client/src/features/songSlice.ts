@@ -46,6 +46,7 @@ const songSlice = createSlice({
       state.songslist = state.songslist.filter(
         (song) => song._id !== deletedSongId
       );
+      state.totalSongs = state.totalSongs > 0 ? state.totalSongs - 1 : 0;
     },
     deleteMusicFailure(state, action: PayloadAction<string>) {
       state.isLoading = false;
