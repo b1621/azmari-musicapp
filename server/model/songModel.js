@@ -24,11 +24,11 @@ const SongSchema = new mongoose.Schema(
     },
     musicDuration: {
       type: String,
+      default: "0:00",
     },
 
     musicFile: {
       type: String,
-      default: "0:00",
     },
 
     artistPic: {

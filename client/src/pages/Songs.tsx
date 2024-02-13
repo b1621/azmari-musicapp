@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getSongs } from "../features/songSlice";
 import moment from "moment";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import DeleteModal from "../components/DeleteModal";
 // Define type for a song item
 interface Song {
   title: string;
@@ -62,9 +64,16 @@ const H2 = styled.div`
   font-size: 1.6rem;
   color: #fff;
 `;
+const DeleteButton = styled.button`
+  color: #dd5235;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
 
 const Songs = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const handleClick = () => {
     setIsOpen(true);
   };
@@ -91,6 +100,7 @@ const Songs = () => {
   return (
     <Box>
       {isOpen && <AddMusic setIsOpen={setIsOpen} />}
+      {isDeleteOpen && <DeleteModal setIsDeleteOpen={setIsDeleteOpen} />}
       <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg">
         {/* <HeaderComponent backgroundImage="geo-chierchia-o-9-fSSiCT0-unsplash.jpg"> */}
         <Header>
@@ -102,7 +112,15 @@ const Songs = () => {
         <Button handleClick={handleClick}>+ Add Task</Button>
       </HeaderStyled>
       <TableLayout
-        headerList={["#", "Title", "Album", "Genre", "Released date"]}
+        headerList={[
+          "#",
+          "Title",
+          "Album",
+          "Genre",
+          "Released date",
+          "Music Duration",
+          "Action",
+        ]}
       >
         {songslist.map((song: Song, index: number) => (
           <TableRow key={index}>
@@ -123,7 +141,13 @@ const Songs = () => {
             <TableData>
               {moment(song.createdAt).format("MMMM Do YYYY")}
             </TableData>
+
             <TableData>{song.musicDuration}</TableData>
+            <TableData>
+              <DeleteButton onClick={() => setIsDeleteOpen(true)}>
+                <RiDeleteBin6Line size={21} />
+              </DeleteButton>
+            </TableData>
           </TableRow>
         ))}
       </TableLayout>
