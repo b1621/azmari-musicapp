@@ -7,6 +7,7 @@ import Artists from "./pages/Artists";
 import Album from "./pages/Album";
 import AlbumDetail from "./pages/AlbumDetail";
 import ArtistDetail from "./pages/ArtistDetail";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const Box = styled.div`
@@ -20,7 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route path="" element={"home"} />
+              <Route path="" element={<Dashboard />} />
               <Route path="song" element={<Songs />} />
               <Route path="artist" element={<Artists />} />
               <Route path="artist/:artist" element={<ArtistDetail />} />
