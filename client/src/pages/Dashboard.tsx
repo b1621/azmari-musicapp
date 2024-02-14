@@ -38,14 +38,25 @@ const BackgroundImage = styled.div<{ backgroundImage: string }>`
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   background-position: center;
-  filter: brightness(0.4); /* Adjust the brightness value as needed */
+  filter: brightness(0.3); /* Adjust the brightness value as needed */
 `;
 
 const Content = styled.div`
+  flex-direction: column;
   position: relative;
   z-index: 1; /* Ensure the text is above the background image */
   text-align: center;
 `;
+const Title = styled.div`
+  margin-top: 20%;
+  font-size: 2rem;
+  color: #d27e4e;
+`;
+const H2 = styled.p`
+  margin-top: 0px;
+  font-size: 1.5rem;
+`;
+
 const Dashboard = () => {
   return (
     <Box>
@@ -53,7 +64,8 @@ const Dashboard = () => {
         <ContentCard>
           <BackgroundImage backgroundImage={"/image-asset.jpg"} />
           <Content>
-            <h2>Songs</h2>
+            <Title>Songs</Title>
+            <H2>12</H2>
           </Content>
         </ContentCard>
         <ContentCard>
@@ -61,7 +73,8 @@ const Dashboard = () => {
             backgroundImage={"/360_F_565699512_WsMiVJCVoyVJhy0X.jpg"}
           />
           <Content>
-            <h2>Artists</h2>
+            <Title>Artists</Title>
+            <H2>5</H2>
           </Content>
         </ContentCard>
         <ContentCard>
@@ -69,13 +82,15 @@ const Dashboard = () => {
             backgroundImage={"/erik-mclean-9y1cTVKe1IY-unsplash.jpg"}
           />
           <Content>
-            <h2>Albums</h2>
+            <Title>Albums</Title>
+            <H2>5</H2>
           </Content>
         </ContentCard>
         <ContentCard>
           <BackgroundImage backgroundImage={"/1_aV1RSXfZYdvT5gfDUblCA.jpg"} />
           <Content>
-            <h2>Genre</h2>
+            <Title>Genre</Title>
+            <H2>5</H2>
           </Content>
         </ContentCard>
       </Container>
