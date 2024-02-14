@@ -88,8 +88,8 @@ export type Music = {
   album: string;
   genre: string;
   musicDuration: string;
-  artistPic: object | null;
-  albumPic: object | null;
+  artistPic: null;
+  albumPic: null;
 };
 
 export type MusicCreated = {

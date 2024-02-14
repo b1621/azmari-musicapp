@@ -52,11 +52,11 @@ const InputCont = styled.div`
   margin: 10px;
   width: 100%;
 `;
-const InputRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
+// const InputRow = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+// `;
 const InputField = styled.input`
   padding: 10px;
   margin-top: 3px;
@@ -122,7 +122,7 @@ const AddMusic = ({ setIsOpen }: AddMusicProps) => {
     musicDuration: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value, files } = e.target;
     if (files && files.length) {
       setFormDatas({
@@ -142,22 +142,14 @@ const AddMusic = ({ setIsOpen }: AddMusicProps) => {
 
     const formData = new FormData();
     Object.keys(formDatas).forEach((key) => {
-      formData.append(key, formDatas[key] as string | Blob);
+      // Asserting key as keyof typeof formDatas ensures that key is of a valid type
+      formData.append(key, (formDatas as any)[key]);
     });
 
     console.log("formdata coverted ==== ", formData);
 
     // dispatch(addNewMusic(formData));
     try {
-      // const response = await axios.post("/api/v1/song/", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // const response = await createNewMusicToServer(formData);
-      // const newSong = await response.data.song;
-
-      // console.log("Response:", response.data);
       dispatch(addNewMusic(formData));
       setIsOpen(false);
     } catch (error) {

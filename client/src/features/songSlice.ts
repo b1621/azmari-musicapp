@@ -22,7 +22,7 @@ const songSlice = createSlice({
   name: "song",
   initialState,
   reducers: {
-    addNewMusic(state, _action: PayloadAction<Music>) {
+    addNewMusic(state, _action: PayloadAction<any>) {
       state.isLoading = true;
     },
     addNewMusicSuccess: (state, action: PayloadAction<MusicCreated>) => {
