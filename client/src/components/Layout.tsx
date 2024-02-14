@@ -18,14 +18,14 @@ const Box = styled.div`
   display: flex;
 `;
 const SidebarBox = styled.div<SidebarProps>`
-  width: ${({ isOpen }) => (isOpen ? "15vw" : "0px")};
+  width: 15vw;
   min-height: 100vh;
   background-color: #272d46;
 
   /* Add media query for smaller screens */
   @media screen and (max-width: 768px) {
     display: none;
-    width: ${({ isOpen }) => (isOpen ? "100%" : "0px")};
+    width: ${({ isOpen }) => (isOpen ? "100px" : "0px")};
   }
 `;
 const Logo = styled.h2`
@@ -92,10 +92,10 @@ const Layout = () => {
   const currentpath = location?.pathname || "/";
 
   console.log("path = ", currentpath);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Box>
-      <MenuButton onClick={() => setIsOpen(true)}>
+      <MenuButton onClick={() => setIsOpen(!true)}>
         <BsList size={30} />
       </MenuButton>
       <SidebarBox isOpen={isOpen}>
