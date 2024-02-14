@@ -38,7 +38,9 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+console.log("++++++++++++");
 const upload = multer({ storage: storage, fileFilter: fileFilter });
+console.log("------------");
 
 router
   .route("/")
