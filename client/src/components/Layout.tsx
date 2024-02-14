@@ -2,8 +2,9 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { RxDashboard } from "react-icons/rx";
 import { BiAlbum } from "react-icons/bi";
-import { BsMusicNoteList } from "react-icons/bs";
+import { BsList, BsMusicNoteList } from "react-icons/bs";
 import { BsFileMusic } from "react-icons/bs";
+import { useState } from "react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -20,6 +21,12 @@ const SidebarBox = styled.div<SidebarProps>`
   width: ${({ isOpen }) => (isOpen ? "15vw" : "0px")};
   min-height: 100vh;
   background-color: #272d46;
+
+  /* Add media query for smaller screens */
+  @media screen and (max-width: 768px) {
+    display: none;
+    width: ${({ isOpen }) => (isOpen ? "100%" : "0px")};
+  }
 `;
 const Logo = styled.h2`
   text-align: center;
@@ -64,14 +71,33 @@ const SidebarLink = styled(Link)<SidebarLinkProps>`
   }
 `;
 
-const Layout = ({ isOpen }: SidebarProps) => {
+const MenuButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none; /* Hide by default */
+  margin: 20px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    right: 0px;
+    position: fixed;
+    z-index: 11;
+  }
+`;
+
+const Layout = () => {
   const location = useLocation();
   const currentpath = location?.pathname || "/";
 
   console.log("path = ", currentpath);
-
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <Box>
+      <MenuButton onClick={() => setIsOpen(true)}>
+        <BsList size={30} />
+      </MenuButton>
       <SidebarBox isOpen={isOpen}>
         <Div1>
           <Logo>

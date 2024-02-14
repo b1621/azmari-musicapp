@@ -8,7 +8,7 @@ const BackgroundOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   opacity: 0.5;
   z-index: 10;
@@ -26,6 +26,10 @@ const FormBox = styled.div`
   width: 40%;
   padding: 20px;
   z-index: 11;
+
+  @media screen and (max-width: 768px) {
+    width: 70%;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -105,6 +109,11 @@ const Container = styled.div`
   display: grid;
   grid-column-gap: 20px;
   grid-template-columns: 45% 45%;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 interface AddMusicProps {
