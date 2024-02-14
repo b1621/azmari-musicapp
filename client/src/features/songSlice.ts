@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Song, Music, MusicCreated, SongDelete, GetSong } from "../utils/types";
+import { Song, MusicCreated, SongDelete, GetSong } from "../utils/types";
 
 interface InitialState {
   isLoading: boolean;
