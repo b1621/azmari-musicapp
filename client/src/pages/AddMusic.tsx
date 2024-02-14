@@ -3,8 +3,6 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { addNewMusic } from "../features/songSlice";
-import axios from "axios";
-import { createNewMusicToServer } from "../httpService/songServices";
 
 const BackgroundOverlay = styled.div`
   position: absolute;
@@ -109,7 +107,10 @@ const Container = styled.div`
   grid-template-columns: 45% 45%;
 `;
 
-const AddMusic = ({ setIsOpen }) => {
+interface AddMusicProps {
+  setIsOpen: (isOpen: boolean) => void;
+}
+const AddMusic = ({ setIsOpen }: AddMusicProps) => {
   const dispatch = useDispatch();
   const [formDatas, setFormDatas] = useState({
     title: "",
@@ -136,12 +137,12 @@ const AddMusic = ({ setIsOpen }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
     Object.keys(formDatas).forEach((key) => {
-      formData.append(key, formDatas[key]);
+      formData.append(key, formDatas[key] as string | Blob);
     });
 
     console.log("formdata coverted ==== ", formData);

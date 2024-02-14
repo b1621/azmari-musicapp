@@ -8,29 +8,9 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getAlbumDetail } from "../features/albumSlice";
 import { RootState } from "../store";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
-const songsList = [
-  {
-    id: 1,
-    title: "qal",
-    musicDuration: "3:30",
-  },
-  {
-    id: 2,
-    title: "fole",
-    musicDuration: "3:10",
-  },
-  {
-    id: 3,
-    title: "dese",
-    musicDuration: "2:50",
-  },
-  {
-    id: 4,
-    title: "haya",
-    musicDuration: "4:30",
-  },
-];
 const Box = styled.div`
   padding: 10px;
   width: 100%;
@@ -63,16 +43,32 @@ const AlbumTitle = styled.div`
 const Content = styled.div`
   padding: 30px;
 `;
+
+// interface RouteParams {
+//   album: string;
+// }
+
 const AlbumDetail = () => {
   const dispatch = useDispatch();
   const { album } = useParams();
+  // const { album } = useParams<RouteParams>();
 
   const { albumSongs, albumPic, artist, totalSongs, isLoading, error } =
     useSelector((state: RootState) => state.album);
 
   useEffect(() => {
-    dispatch(getAlbumDetail(album));
+    if (album) {
+      dispatch(getAlbumDetail(album));
+    }
   }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
   return (
     <Box>
       <HeaderComponent backgroundImage="">

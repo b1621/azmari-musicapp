@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Song, Artist, Music, MusicCreated, SongDelete } from "../utils/types";
+import { Song, Music, MusicCreated, SongDelete, GetSong } from "../utils/types";
 
 interface InitialState {
   isLoading: boolean;
@@ -36,7 +36,7 @@ const songSlice = createSlice({
       state.error = action.payload;
       console.log("failed slice === ", action);
     },
-    deleteMusic(state, _action: PayloadAction<Music>) {
+    deleteMusic(state, _action: PayloadAction<string>) {
       state.isLoading = true;
     },
     deleteMusicSuccess: (state, action: PayloadAction<SongDelete>) => {
@@ -58,7 +58,7 @@ const songSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getSongsSuccess(state, action: PayloadAction<Song[]>) {
+    getSongsSuccess(state, action: PayloadAction<GetSong>) {
       state.isLoading = false;
       state.error = null;
       state.songslist = action.payload.songs;

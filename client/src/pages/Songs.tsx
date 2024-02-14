@@ -14,21 +14,23 @@ import { deleteMusic, getSongs } from "../features/songSlice";
 import moment from "moment";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeleteModal from "../components/DeleteModal";
+import { Song } from "../utils/types";
 // Define type for a song item
-interface Song {
-  title: string;
-  artist: string;
-  artistPhoto: string;
-  album: string;
-  dateAdded: string;
-  musicDuration: string;
-}
+// interface Song {
+//   title: string;
+//   artist: string;
+//   artistPhoto: string;
+//   album: string;
+//   dateAdded: string;
+//   musicDuration: string;
+// }
 
 // Define type for your Redux state
 interface SongsState {
   songslist: Song[];
   isLoading: boolean;
   error: string;
+  totalSongs: number;
 }
 
 const Box = styled.div`
@@ -74,13 +76,16 @@ const DeleteButton = styled.button`
 const Songs = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [singleSong, setSingleSong] = useState({});
+  // const [singleSong, setSingleSong] = useState({});
+  const [singleSong, setSingleSong] = useState<Song | null>(null);
   const handleClick = () => {
     setIsOpen(true);
   };
 
   const handleConfirm = () => {
-    dispatch(deleteMusic(singleSong._id));
+    if (singleSong && singleSong._id) {
+      dispatch(deleteMusic(singleSong._id));
+    }
     setIsDeleteOpen(false);
   };
 

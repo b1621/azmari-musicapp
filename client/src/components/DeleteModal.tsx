@@ -35,7 +35,12 @@ const DeleteButton = styled(Button)`
   background-color: #dc381f;
 `;
 
-const DeleteModal = ({ setIsDeleteOpen, handleConfirm }) => {
+interface DeleteModalProps {
+  setIsDeleteOpen: (isOpen: boolean) => void;
+  handleConfirm: () => void;
+}
+
+const DeleteModal = ({ setIsDeleteOpen, handleConfirm }: DeleteModalProps) => {
   return (
     <>
       <BackgroundOverlay />

@@ -9,14 +9,27 @@ export type Song = {
   updatedAt: string;
   artistPic: string;
   albumPic: string;
+  title?: string;
+  artist?: string;
+  album?: string;
+};
+
+export type GetSong = {
+  songs: Song[];
+  total: number;
+  error?: string;
 };
 
 export type Artist = {
   artist: string;
   artistPic: string;
-  totalSongs: number;
-};
 
+  songCount: number;
+};
+export type GetArtist = {
+  total: number;
+  artists: Artist[];
+};
 export type ArtistData = {
   title: string;
   artist: string;
@@ -25,12 +38,14 @@ export type ArtistData = {
   createdAt: string;
   updatedAt: string;
   artistPic: string;
+  musicDuration: string;
 };
 
 export type SingleArtist = {
   total: number;
   totalAlbums: number;
   artistPic: string;
+
   songs: ArtistData[];
 };
 
@@ -56,13 +71,14 @@ export type AlbumSong = {
   updatedAt: string;
   artistPic: string;
   albumPic: string;
+  musicDuration: string;
 };
 export type AlbumDetail = {
   albumName: string;
   artist: string;
   albumPic: string;
   total: number;
-  songs: Song[];
+  songs: AlbumSong[];
 };
 
 export type Music = {

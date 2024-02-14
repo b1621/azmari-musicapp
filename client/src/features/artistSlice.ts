@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Artist, ArtistData, SingleArtist } from "../utils/types";
+import { Artist, ArtistData, GetArtist, SingleArtist } from "../utils/types";
 
 interface InitialState {
   artistsList: Artist[];
@@ -9,7 +9,7 @@ interface InitialState {
   error: string | null;
   totalAlbums: number;
   artistPic: string;
-  artistData: ArtistData | [];
+  artistData: ArtistData[];
 }
 
 const initialState: InitialState = {
@@ -31,7 +31,7 @@ const artistSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    getArtistsSuccess(state, action: PayloadAction<Artist[]>) {
+    getArtistsSuccess(state, action: PayloadAction<GetArtist>) {
       state.isLoading = false;
       state.error = null;
       state.artistsList = action.payload.artists;
@@ -43,7 +43,7 @@ const artistSlice = createSlice({
       state.error = action.payload;
     },
 
-    getArtistData(state) {
+    getArtistData(state, _action: PayloadAction<string>) {
       state.isLoading = true;
       state.error = null;
     },

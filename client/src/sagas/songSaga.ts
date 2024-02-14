@@ -1,13 +1,14 @@
 import { takeLatest, put, call, fork } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  Song,
-  Artist,
   SingleArtist,
   AlbumInfo,
   AlbumDetail,
   Music,
   SongDelete,
+  GetSong,
+  GetArtist,
+  MusicCreated,
 } from "../utils/types.ts";
 import {
   fetchAllSongs,
@@ -49,11 +50,11 @@ import { toast } from "react-toastify";
 
 function* getSongsAsync() {
   try {
-    const songs: Song[] = yield call(fetchAllSongs);
+    const songs: GetSong = yield call(fetchAllSongs);
     console.log("songs === ", songs);
 
     yield put(getSongsSuccess(songs));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getSongsFailure(error.message));
     console.log("error ", error);
   }
@@ -64,11 +65,11 @@ function* watchFetchSongs() {
 
 function* getArtistsAsync() {
   try {
-    const artists: Artist[] = yield call(fetchAllArtists);
+    const artists: GetArtist = yield call(fetchAllArtists);
     console.log("artists === ", artists);
 
     yield put(getArtistsSuccess(artists));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getArtistsFailure(error.message));
     console.log("error ", error);
   }
@@ -86,7 +87,7 @@ function* getArtistDataAsync(action: PayloadAction<string>) {
     console.log("artists === ", artists);
 
     yield put(getArtistDataSuccess(artists));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getArtistDataFailure(error.message));
     console.log("error ", error);
   }
@@ -103,7 +104,7 @@ function* getAlbumsAsync() {
     console.log("albums === ", albums);
 
     yield put(getAlbumsListSuccess(albums));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getAlbumsListFailure(error.message));
     console.log("error ", error);
   }
@@ -121,7 +122,7 @@ function* getAlbumDetailAsync(action: PayloadAction<string>) {
     console.log("albumDetail === ", albumDetail);
 
     yield put(getAlbumDetailSuccess(albumDetail));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getAlbumDetailFailure(error.message));
     console.log("error ", error);
   }
@@ -135,12 +136,12 @@ function* watchFetchAlbumDetail() {
 function* createMusicAsync({ payload }: PayloadAction<Music>) {
   try {
     const songPayload = payload;
-    const song: Music = yield call(createNewMusicToServer, songPayload);
+    const song: MusicCreated = yield call(createNewMusicToServer, songPayload);
     console.log("create music ===", song);
 
     yield put(addNewMusicSuccess(song));
     toast.success("Song Added Success");
-  } catch (error) {
+  } catch (error: any) {
     yield put(addNewMusicFailure(error.message));
     toast.error("creating song failed");
   }
@@ -158,7 +159,7 @@ function* deleteMusicAsync(action: PayloadAction<string>) {
     console.log("deletedsong === ", deletedsong);
 
     yield put(deleteMusicSuccess(deletedsong));
-  } catch (error) {
+  } catch (error: any) {
     yield put(deleteMusicFailure(error.message));
     console.log("error ", error);
   }

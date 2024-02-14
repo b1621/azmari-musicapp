@@ -44,7 +44,7 @@ const albumSlice = createSlice({
       state.error = action.payload;
     },
 
-    getAlbumDetail(state) {
+    getAlbumDetail(state, _action: PayloadAction<string>) {
       state.isLoading = true;
       state.error = null;
     },

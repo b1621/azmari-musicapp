@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAlbumsList } from "../features/albumSlice";
 import { RootState } from "../store";
+import Error from "../components/Error";
+import Loading from "../components/Loading";
 
 const Box = styled.div`
   padding: 10px;
@@ -38,6 +40,14 @@ const Album = () => {
   useEffect(() => {
     dispatch(getAlbumsList());
   }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
   return (
     <Box>
       {/* <HeaderComponent backgroundImage="y-peyankov-ge256Z4s_jk-unsplash.jpg"> */}

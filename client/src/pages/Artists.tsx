@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtists } from "../features/artistSlice";
 import { RootState } from "../store";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const Box = styled.div`
   padding: 10px;
@@ -41,6 +43,14 @@ const Artists = () => {
   useEffect(() => {
     dispatch(getArtists());
   }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
   return (
     <Box>
       {/* <HeaderComponent backgroundImage="austin-neill-hgO1wFPXl3I-unsplash.jpg"> */}

@@ -46,12 +46,15 @@ const Content = styled.div`
 `;
 const ArtistDetail = () => {
   const dispatch = useDispatch();
-  const { artist } = useParams();
+  const params = useParams<{ artist: string }>();
+  const artist = params.artist;
 
   const { artistData, totalSong, totalAlbums, artistPic, isLoading, error } =
     useSelector((state: RootState) => state.artist);
   useEffect(() => {
-    dispatch(getArtistData(artist));
+    if (artist) {
+      dispatch(getArtistData(artist));
+    }
   }, [dispatch]);
 
   if (isLoading) {
