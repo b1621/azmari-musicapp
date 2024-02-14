@@ -19,7 +19,7 @@ function App() {
       <Box>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout isOpen={true} />}>
+            <Route path="/" element={<Layout />}>
               <Route path="" element={"home"} />
               <Route path="song" element={<Songs />} />
               <Route path="artist" element={<Artists />} />
