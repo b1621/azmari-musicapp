@@ -1,8 +1,8 @@
-FROM node:20.9.0-alpine3.17
+FROM node:20.9.0
 RUN mkdir -p /opt/app
-WORKDIR /opt/app
-COPY src/package.json src/package-lock.json .
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-COPY src/ .
+COPY . .
 EXPOSE 7777
 CMD [ "npm", "run", "server"]
