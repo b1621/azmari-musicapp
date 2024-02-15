@@ -26,6 +26,42 @@ exports.getAllSongs = asyncHandler(async (req, res) => {
     throw new Error(error);
   }
 });
+
+exports.getStatstics = asyncHandler(async (req, res) => {
+  try {
+    const songs = await Song.find({});
+    console.log("songs == ", songs);
+    const stats = await Song.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalSongs: { $sum: 1 }, // Count total number of songs
+          uniqueAlbums: { $addToSet: "$album" }, // Get unique albums
+          uniqueArtists: { $addToSet: "$artist" }, // Get unique artists
+          uniqueGenres: { $addToSet: "$genre" }, // Get unique genres
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          totalSongs: 1, // Corrected field name
+          totalUniqueAlbums: { $size: "$uniqueAlbums" }, // Count unique albums
+          totalUniqueArtists: { $size: "$uniqueArtists" }, // Count unique artists
+          totalUniqueGenres: { $size: "$uniqueGenres" }, // Count unique genres
+        },
+      },
+    ]);
+    console.log("stats == ", stats);
+    res.status(200).json({
+      stats,
+    });
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+    throw new Error(error);
+  }
+});
+
 exports.createSong = asyncHandler(async (req, res) => {
   try {
     const { title, artist, album, genre, musicDuration } = req.body;
@@ -334,3 +370,35 @@ exports.getAlbumSongs = asyncHandler(async (req, res) => {
 
 //album
 //albumPic
+
+exports.StatsInfo = asyncHandler(async (req, res) => {
+  try {
+    const stats = await Song.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalSongs: { $sum: 1 }, // Count total number of songs
+          uniqueAlbums: { $addToSet: "$album" }, // Get unique albums
+          uniqueArtists: { $addToSet: "$artist" }, // Get unique artists
+          uniqueGenres: { $addToSet: "$genre" }, // Get unique genres
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          totalSongs: 1, // Corrected field name
+          totalUniqueAlbums: { $size: "$uniqueAlbums" }, // Count unique albums
+          totalUniqueArtists: { $size: "$uniqueArtists" }, // Count unique artists
+          totalUniqueGenres: { $size: "$uniqueGenres" }, // Count unique genres
+        },
+      },
+    ]);
+    console.log("stats == ", stats);
+    res.status(200).json({
+      stats,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});

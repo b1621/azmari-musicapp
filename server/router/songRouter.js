@@ -6,6 +6,8 @@ const {
   getAllSongs,
   createSong,
   deleteSong,
+  // getStats,
+  StatsInfo,
 } = require("../controller/songController");
 
 const router = express.Router();
@@ -54,4 +56,5 @@ router
   );
 
 router.route("/:songId").delete(deleteSong);
+router.route("/statInfo").get(StatsInfo);
 module.exports = router;
