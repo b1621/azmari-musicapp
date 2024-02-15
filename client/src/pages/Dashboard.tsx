@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 // import axios from "axios";
 import { useEffect } from "react";
-import { fetchAllStats } from "../httpService/songServices";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getStat } from "../features/songSlice";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
+import { RootState } from "../store";
+import { Stat } from "../utils/types";
 const Box = styled.div`
   box-sizing: border-box;
   margin: 60px;
@@ -59,22 +63,29 @@ const H2 = styled.p`
   margin-top: 0px;
   font-size: 1.5rem;
 `;
-
+interface StatState {
+  stat: Stat;
+  isLoading: boolean;
+  error: string;
+}
 const Dashboard = () => {
-  // const fetchStats = async () => {
-  //   try {
-  //     // const res = await axios.get("/api/v1/song/statInfo");
-  //     // const data = await res.data;
-
-  //     console.log("stat data ", data);
-  //   } catch (error) {
-  //     throw new Error("error : ", error);
-  //   }
-  // };
-
+  const dispatch = useDispatch();
+  const { stat, isLoading, error } = useSelector(
+    (state: RootState) => state.song
+  ) as StatState;
   useEffect(() => {
-    fetchAllStats();
+    // fetchAllStats();
+    dispatch(getStat());
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>Error: {error}</Error>;
+  }
+
   return (
     <Box>
       <Container>
@@ -82,7 +93,7 @@ const Dashboard = () => {
           <BackgroundImage backgroundImage={"/image-asset.jpg"} />
           <Content>
             <Title>Songs</Title>
-            <H2>12</H2>
+            <H2>{stat.totalSongs}</H2>
           </Content>
         </ContentCard>
         <ContentCard>
@@ -91,7 +102,7 @@ const Dashboard = () => {
           />
           <Content>
             <Title>Artists</Title>
-            <H2>5</H2>
+            <H2>{stat.totalUniqueArtists}</H2>
           </Content>
         </ContentCard>
         <ContentCard>
@@ -100,14 +111,14 @@ const Dashboard = () => {
           />
           <Content>
             <Title>Albums</Title>
-            <H2>5</H2>
+            <H2>{stat.totalUniqueAlbums}</H2>
           </Content>
         </ContentCard>
         <ContentCard>
           <BackgroundImage backgroundImage={"/1_aV1RSXfZYdvT5gfDUblCA.jpg"} />
           <Content>
             <Title>Genre</Title>
-            <H2>5</H2>
+            <H2>{stat.totalUniqueGenres}</H2>
           </Content>
         </ContentCard>
       </Container>

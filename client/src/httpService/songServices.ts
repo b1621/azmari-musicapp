@@ -67,7 +67,7 @@ export const deleteSongServer = (songId: string): Promise<SongDelete> => {
 
 export const fetchAllStats = (): Promise<AlbumInfo> => {
   const result = axiosClient.get("/song/statInfo") as Promise<AlbumInfo>;
-  console.log("fetch album result == ", result);
+  console.log("fetch stat result == ", result);
 
   return result;
 };

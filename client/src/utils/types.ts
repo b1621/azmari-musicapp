@@ -101,3 +101,10 @@ export type SongDelete = {
   message: string;
   songId: string;
 };
+
+export type Stat = {
+  totalSongs: number;
+  totalUniqueAlbums: number;
+  totalUniqueArtists: number;
+  totalUniqueGenres: number;
+};

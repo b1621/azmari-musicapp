@@ -9,6 +9,7 @@ import {
   GetSong,
   GetArtist,
   MusicCreated,
+  Stat,
 } from "../utils/types.ts";
 import {
   fetchAllSongs,
@@ -18,6 +19,7 @@ import {
   fetchAlbumDetail,
   createNewMusicToServer,
   deleteSongServer,
+  fetchAllStats,
 } from "../httpService/songServices.ts";
 import {
   getSongs,
@@ -29,6 +31,9 @@ import {
   deleteMusic,
   deleteMusicFailure,
   deleteMusicSuccess,
+  getStat,
+  getStatFailure,
+  getStatSuccess,
 } from "../features/songSlice.ts";
 import {
   getArtists,
@@ -169,6 +174,22 @@ function* watchDeleteMusicAsync() {
   yield takeLatest(deleteMusic.type, deleteMusicAsync);
 }
 
+// get stat
+function* getStatAsync() {
+  try {
+    const stat: Stat = yield call(fetchAllStats);
+    console.log("stat === ", stat);
+
+    yield put(getStatSuccess(stat));
+  } catch (error: any) {
+    yield put(getStatFailure(error.message));
+    console.log("error ", error);
+  }
+}
+function* watchFetchStat() {
+  yield takeLatest(getStat.type, getStatAsync);
+}
+
 export const songSagas = [
   fork(watchFetchSongs),
   fork(watchFetchArtists),
@@ -177,4 +198,5 @@ export const songSagas = [
   fork(watchFetchAlbumDetail),
   fork(watchCreateSong),
   fork(watchDeleteMusicAsync),
+  fork(watchFetchStat),
 ];

@@ -27,40 +27,40 @@ exports.getAllSongs = asyncHandler(async (req, res) => {
   }
 });
 
-exports.getStatstics = asyncHandler(async (req, res) => {
-  try {
-    const songs = await Song.find({});
-    console.log("songs == ", songs);
-    const stats = await Song.aggregate([
-      {
-        $group: {
-          _id: null,
-          totalSongs: { $sum: 1 }, // Count total number of songs
-          uniqueAlbums: { $addToSet: "$album" }, // Get unique albums
-          uniqueArtists: { $addToSet: "$artist" }, // Get unique artists
-          uniqueGenres: { $addToSet: "$genre" }, // Get unique genres
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          totalSongs: 1, // Corrected field name
-          totalUniqueAlbums: { $size: "$uniqueAlbums" }, // Count unique albums
-          totalUniqueArtists: { $size: "$uniqueArtists" }, // Count unique artists
-          totalUniqueGenres: { $size: "$uniqueGenres" }, // Count unique genres
-        },
-      },
-    ]);
-    console.log("stats == ", stats);
-    res.status(200).json({
-      stats,
-    });
-  } catch (error) {
-    res.status(500);
-    console.log(error);
-    throw new Error(error);
-  }
-});
+// exports.getStatstics = asyncHandler(async (req, res) => {
+//   try {
+//     const songs = await Song.find({});
+//     console.log("songs == ", songs);
+//     const stats = await Song.aggregate([
+//       {
+//         $group: {
+//           _id: null,
+//           totalSongs: { $sum: 1 }, // Count total number of songs
+//           uniqueAlbums: { $addToSet: "$album" }, // Get unique albums
+//           uniqueArtists: { $addToSet: "$artist" }, // Get unique artists
+//           uniqueGenres: { $addToSet: "$genre" }, // Get unique genres
+//         },
+//       },
+//       {
+//         $project: {
+//           _id: 0,
+//           totalSongs: 1, // Corrected field name
+//           totalUniqueAlbums: { $size: "$uniqueAlbums" }, // Count unique albums
+//           totalUniqueArtists: { $size: "$uniqueArtists" }, // Count unique artists
+//           totalUniqueGenres: { $size: "$uniqueGenres" }, // Count unique genres
+//         },
+//       },
+//     ]);
+//     console.log("stats == ", stats);
+//     res.status(200).json({
+//       stats,
+//     });
+//   } catch (error) {
+//     res.status(500);
+//     console.log(error);
+//     throw new Error(error);
+//   }
+// });
 
 exports.createSong = asyncHandler(async (req, res) => {
   try {
@@ -373,6 +373,8 @@ exports.getAlbumSongs = asyncHandler(async (req, res) => {
 
 exports.StatsInfo = asyncHandler(async (req, res) => {
   try {
+    const songs = await Song.find({});
+    console.log("song for test ", songs);
     const stats = await Song.aggregate([
       {
         $group: {
@@ -394,24 +396,25 @@ exports.StatsInfo = asyncHandler(async (req, res) => {
       },
     ]);
 
-    // if (stats.length === 0) {
-    //   // If the stats array is empty, return default values
-    //   res.status(200).json({
-    //     totalSongs: 0,
-    //     totalAlbums: 0,
-    //     totalArtists: 0,
-    //     totalGenres: 0,
-    //   });
-    // }
+    if (stats.length === 0) {
+      // If the stats array is empty, return default values
+      res.status(200).json({
+        totalSongs: 0,
+        totalAlbums: 0,
+        totalArtists: 0,
+        totalGenres: 0,
+      });
+    } else {
+      // Extract the result
+      const [result] = stats;
 
-    // // Extract the result
-    // const [result] = stats;
-
-    // res.status(200).json(result);
-    console.log("stats == ", stats);
-    res.status(200).json({
-      stats,
-    });
+      // console.log("stats == ", stats);
+      res.status(200).json(result);
+      console.log("stats result== ", result);
+    }
+    // res.status(200).json({
+    //   stats,
+    // });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
