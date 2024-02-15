@@ -5,6 +5,7 @@ import { BiAlbum } from "react-icons/bi";
 import { BsList, BsMusicNoteList } from "react-icons/bs";
 import { BsFileMusic } from "react-icons/bs";
 import { useState } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -24,24 +25,32 @@ const SidebarBox = styled.div<SidebarProps>`
 
   /* Add media query for smaller screens */
   @media screen and (max-width: 768px) {
-    display: none;
-    width: ${({ isOpen }) => (isOpen ? "100px" : "0px")};
+    z-index: 11;
+    position: ${({ isOpen }) => (isOpen ? "absolute" : "none")};
+    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+    width: ${({ isOpen }) => (isOpen ? "80%" : "0px")};
   }
 `;
 const Logo = styled.h2`
   text-align: center;
   color: white;
-  margin: 20px 0;
+  margin: 10px 0;
 `;
 const LogoImage = styled.img`
   width: 25px;
   margin-right: 2px;
 `;
 const Div1 = styled.div`
-  margin: 30px 0;
+  margin-bottom: 30px;
 `;
 const Div2 = styled.div`
   padding: 10px 0;
+`;
+const Div3 = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: end;
+  padding: 0 20px;
 `;
 const Content = styled.div`
   width: 82vw;
@@ -67,11 +76,10 @@ const SidebarLink = styled(Link)<SidebarLinkProps>`
     background-color: #394262;
     border-radius: 5px;
     color: #fb8b24;
-    // border-left: 3px solid hotpink;
   }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.button<SidebarProps>`
   background: none;
   border: none;
   color: white;
@@ -80,10 +88,21 @@ const MenuButton = styled.button`
   margin: 20px;
 
   @media screen and (max-width: 768px) {
-    display: block;
+    display: ${({ isOpen }) => (isOpen ? "none" : "block")};
     right: 0px;
     position: fixed;
     z-index: 11;
+  }
+`;
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none; /* Hide by default */
+
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -95,10 +114,21 @@ const Layout = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Box>
-      <MenuButton onClick={() => setIsOpen(!true)}>
+      <MenuButton
+        isOpen={isOpen}
+        onClick={() => {
+          setIsOpen(true);
+          console.log("open sidebar");
+        }}
+      >
         <BsList size={30} />
       </MenuButton>
       <SidebarBox isOpen={isOpen}>
+        <Div3>
+          <CloseButton onClick={() => setIsOpen(false)}>
+            <IoCloseOutline size={22} />
+          </CloseButton>
+        </Div3>
         <Div1>
           <Logo>
             {" "}
