@@ -11,6 +11,15 @@ import {
 import axiosClient from "./axiosClient";
 
 export const fetchAllSongs = (): Promise<Song[]> => {
+  // Get the Axios configuration object
+  const config = axiosClient.defaults;
+
+  // Construct the full URL by concatenating the base URL with the endpoint
+  const fullUrl = config.baseURL + "/song/";
+
+  // Log the full URL
+  console.log("Full API URL:", fullUrl);
+
   const result = axiosClient.get("/song/") as Promise<Song[]>;
   console.log("fetch songs result == ", result);
 
