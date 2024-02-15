@@ -393,6 +393,21 @@ exports.StatsInfo = asyncHandler(async (req, res) => {
         },
       },
     ]);
+
+    // if (stats.length === 0) {
+    //   // If the stats array is empty, return default values
+    //   res.status(200).json({
+    //     totalSongs: 0,
+    //     totalAlbums: 0,
+    //     totalArtists: 0,
+    //     totalGenres: 0,
+    //   });
+    // }
+
+    // // Extract the result
+    // const [result] = stats;
+
+    // res.status(200).json(result);
     console.log("stats == ", stats);
     res.status(200).json({
       stats,

@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        // target: "http://localhost:5544",
-        target: "https://azmari-server.onrender.com",
+        target: "http://localhost:5544",
+        // target: "https://azmari-server.onrender.com",
         changeOrigin: true,
       },
     },

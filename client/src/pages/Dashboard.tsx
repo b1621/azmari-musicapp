@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import axios from "axios";
+import { useEffect } from "react";
+import { fetchAllStats } from "../httpService/songServices";
 
 const Box = styled.div`
   box-sizing: border-box;
@@ -58,6 +61,20 @@ const H2 = styled.p`
 `;
 
 const Dashboard = () => {
+  // const fetchStats = async () => {
+  //   try {
+  //     // const res = await axios.get("/api/v1/song/statInfo");
+  //     // const data = await res.data;
+
+  //     console.log("stat data ", data);
+  //   } catch (error) {
+  //     throw new Error("error : ", error);
+  //   }
+  // };
+
+  useEffect(() => {
+    fetchAllStats();
+  }, []);
   return (
     <Box>
       <Container>

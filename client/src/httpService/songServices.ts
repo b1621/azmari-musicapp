@@ -64,3 +64,10 @@ export const deleteSongServer = (songId: string): Promise<SongDelete> => {
 
   return result;
 };
+
+export const fetchAllStats = (): Promise<AlbumInfo> => {
+  const result = axiosClient.get("/song/statInfo") as Promise<AlbumInfo>;
+  console.log("fetch album result == ", result);
+
+  return result;
+};
