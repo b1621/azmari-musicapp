@@ -19,6 +19,7 @@ export const fetchAllSongs = (): Promise<Song[]> => {
 
   // Log the full URL
   console.log("Full API URL:", fullUrl);
+  console.log("11");
 
   const result = axiosClient.get("/song/") as Promise<Song[]>;
   console.log("fetch songs result == ", result);
