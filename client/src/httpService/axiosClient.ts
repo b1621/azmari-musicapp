@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "",
+  baseURL: "https://azmari-server.onrender.com/api/v1",
   headers: {
     "Content-Type": "application/json",
   },
